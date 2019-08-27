@@ -1,0 +1,25 @@
+#!/bin/sh
+set -eux
+
+source ./machine-setup.sh > /dev/null 2>&1
+    source ../modulefiles/gen_trkr.wcoss_dell_p3
+echo $G2_INCd
+echo ${W3EMC_INC4}
+echo ${W3EMC_LIBd}
+echo ${W3NCO_LIBd}
+echo ${G2_LIBd}
+echo ${Z_LIB}
+echo ${BACIO_LIB4}
+echo ${JASPER_LIB}
+echo ${PNG_LIB}
+
+for dir in gettrk_main_gen.fd oprver_glbl.fd supvit.fd supvit_gen_main.fd wrtdat.fd
+do
+  echo $dir
+  cd $dir
+  make -f makefile
+  make -f makefile clean
+  make -f makefile install
+  cd ..
+done
+

@@ -1,0 +1,176 @@
+#!/bin/sh
+
+########################################
+# TROPICAL CYCLONE TRACKER SCRIPT
+########################################
+
+date
+export PS4=' $SECONDS + ' 
+set -x
+
+# 
+# obtain unique process id (pid) and make temp directories
+#
+export pid=${pid:-$$}
+export DATA=${DATA:-$DATAROOT/$jobid}
+mkdir -p $DATA
+cd $DATA
+export cycle=${cycle:-t${cyc}z}
+
+####################################
+# Specify NET Name and model
+#
+# model - model grib field to repack
+####################################
+export NET=${NET:?}
+export RUN=${RUN:?}
+
+####################################
+# File To Log Msgs
+####################################
+export jlogfile=${jlogfile:-${COMROOT}/logs/jlogfiles/jlogfile.${jobid}}
+
+####################################
+# Determine Job Output Name on System
+####################################
+export pgmout="OUTPUT.$$"
+
+export cycle=t${cyc}z 
+export CYC=$cyc
+
+####################################
+# SENDECF  - Flag Events on ECF
+# SENDCOM  - Copy Files From TMPDIR to $com
+# SENDDBN  - Send files to OSO
+####################################
+export SENDECF=${SENDECF:-YES}
+export SENDCOM=${SENDCOM:-YES}
+export SENDDBN=${SENDDBN:-YES}
+export SENDOMB=${SENDOMB:-YES}
+
+####################################
+# Specify TRACKER version number
+####################################
+export TRACKER_VERSION=${TRACKER_VERSION:-${genesis_tracker_ver}}
+
+################################
+# Set up the HOME directory
+################################
+export HOMEtracker=${HOMEtracker:-${NWROOT}/genesis_tracker.$TRACKER_VERSION}
+#export HOMEtracker=/meso/save/Guang.Ping.Lou/EMC_verif/trk_glbl/tags/genesis_tracker.v3.4.7
+export SCRIPTStrkr=$HOMEtracker/scripts
+export EXECtrkr=$HOMEtracker/exec
+export FIXtrkr=$HOMEtracker/fix
+export PARMtrkr=$HOMEtracker/parm
+export USHtrkr=$HOMEtracker/ush
+
+##############################
+# Load modules
+##############################
+module load grib_util
+module load prod_util
+
+##############################
+# Run setpdy and initialize PDY variables
+##############################
+#setpdy.sh
+#. PDY
+PDY=$1
+if [ ${#PDY} -eq 0 ]
+then
+setpdy.sh
+. PDY
+fi
+###############################################
+# Define COMIN and COMOUT directory
+###############################################
+
+export COMROOTp3=/gpfs/dell1/nco/ops/com
+# COMIN for gfs, nam and arch
+export namvitdir=$(compath.py nam/prod)
+export gfsvitdir=$(compath.py gfs/prod)
+export archsyndir=${COMROOTp3}/arch/prod/syndat
+# Input and output
+export COMGLTRK=${COMROOTp3}/gentracks/${envir}/gentracks
+
+# output
+export tmscrdir=${COMROOTp3}/arch/${envir}
+
+case $cmodel in
+  gefs)  export COMIN=$(compath.py ${NET}/prod/${RUN}.$PDY)/$CYC/pgrb2a
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
+         ;;
+  fens)  export COMIN=${DCOMROOT}/us007003/${PDY}/wgrbbul/fnmocens_gb2
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
+         ;;
+  sref)  export COMIN=$(compath.py $NET/prod/${RUN}.$PDY)/$CYC/pgrb
+         export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY/track
+         ;;
+  ecmwf) export COMIN=${DCOMROOT}/$NET/${PDY}/wgrbbul/${RUN}
+         export COMOUT=${COMROOTp3}/${RUN}/${envir}/${RUN}.${PDY}
+         ;;
+  eens) 
+         export COMIN=${COMROOTp1}/$NET/prod/${RUN}.$PDY
+         export ECEDIRIN=${COMROOThps}/ens_tracker/prod/ecme.${PDY}
+         export COMOUT=${COMROOTp3}/$NET/${envir}/${RUN}.$PDY
+         ;;
+  cens)  export COMIN=${COMROOThps}/naefs/prod/${RUN}.$PDY/$CYC/pgrb2ap5
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
+         ;;
+   cmc)  export COMIN=/${DCOMROOT}/us007003/$PDY/wgrbbul/cmc_gdps_25km
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.${PDY}/track
+         ;;
+   gfs)  export COMIN=$(compath.py ${NET}/prod/${RUN}.$PDY)/$CYC
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
+         ;;
+   nvgm) export COMIN=${DCOMROOT}/us007003/$RUN
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.${PDY}/track
+         ;;
+  ukmet) export COMIN=${COMROOThps}/ens_tracker/prod/$RUN.${PDY}/${CYC}/pgrba
+         export COMOUT=${COMROOTp3}/$NET/${envir}/${RUN}.${PDY}/track
+         ;;
+  nam)   export COMIN=$(compath.py ${NET}/prod/${RUN}.$PDY)
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
+         ;;
+   *)    export COMIN=${COMROOTp1}/$NET/prod/${RUN}.${PDY}
+         export COMOUT=${COMROOTp3}/$NET/${envir}/${RUN}.${PDY}  
+         ;;
+esac
+
+###########################################################
+# COMOMB for daily track file 
+# COMGLTRK for track archive file, yearly 
+###########################################################
+export COMOMB=${COMROOT}/omb/${envir}/tracker.${PDY}
+
+mkdir -p $COMOUT $COMOMB $COMGLTRK
+
+env
+
+######################################
+# Execute the script
+######################################
+export DO_TRACKER=${DO_TRACKER:-YES}
+
+region="1 2"
+
+export CYL=${CYL:-$cyc}
+export init_flag=no
+for reg in $region
+do
+  if [ $DO_TRACKER = YES ]
+  then
+     $HOMEtracker/scripts/exgenesis_tracker_poe.sh.ecf $PDY $CYL $cmodel $reg $init_flag
+  fi
+done
+
+########################################################
+
+cat $pgmout
+
+date
+
+if [ "$KEEPDATA" != YES ]; then
+   cd $DATAROOT
+   rm -rf $DATA
+fi

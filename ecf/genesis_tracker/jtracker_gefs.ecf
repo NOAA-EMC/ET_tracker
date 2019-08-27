@@ -1,0 +1,60 @@
+#BSUB -J %E%tracker_gefs_%CYC%
+#BSUB -o /gpfs/dell1/nco/ops/com/output/%ENVIR%/today/tracker_gefs_%CYC%.o%J
+#BSUB -e /gpfs/dell1/nco/ops/com/output/%ENVIR%/today/tracker_gefs_%CYC%.o%J
+#BSUB -L /bin/sh
+#BSUB -q %QUEUE%
+#BSUB -cwd /tmpnwprd
+##BSUB -W 00:80
+#BSUB -W 01:40
+#BSUB -P %PROJ%
+#BSUB -a poe
+#BSUB -x
+#BSUB -n 21
+#BSUB -R span[ptile=21]
+
+%include <head.h>
+%include <envir-p2.h>
+
+# EXPORT list here
+set -x
+export envir=%ENVIR%
+export cmodel=gefs
+export NET=gens
+export RUN=gefs
+export cyc=%CYC%
+export job=tracker_gefs_%CYC%
+export res=%RES%
+
+VERSION_FILE=$NWROOT/versions/genesis_tracker.ver
+if [ -f $VERSION_FILE ]; then
+  . $VERSION_FILE
+else
+  ecflow_client --msg="***JOB ${SMSNAME} ERROR: Version File $VERSION_FILE does not exist ***"
+  ecflow_client --abort
+  exit
+fi
+
+$NWROOT/genesis_tracker.${genesis_tracker_ver}/jobs/JTRACKER
+
+if [ $? -ne 0 ]; then
+  ecflow_client --msg="***JOB ${SMSNAME} ERROR RUNNING J-SCRIPT ***"
+  ecflow_client --abort
+  exit
+fi
+
+%include <tail.h>
+%manual
+######################################################################
+PURPOSE:  To extract the storm tracks from gefs model forecasts.
+######################################################################
+
+######################################################################
+# Job specific troubleshooting instructions:
+#  see generic troubleshoot manual page
+#
+######################################################################
+
+# include manual page below
+%end
+~
+

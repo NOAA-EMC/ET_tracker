@@ -1,0 +1,25 @@
+#! /usr/bin/env bash
+set -eux
+ISIZE = 4
+RSIZE = 8
+FC=  ifort -nofree
+CC=  icc
+INC = /nwprod/lib/incmod/g2_d
+LIBS=   -L/nwprod/lib -lw3emc_d -lw3nco_d -lg2_d -lbacio_4 -ljasper -lpng -lz
+LDFLAGS= 
+FFLAGS= -O0 -g -fpe0 -I $(INC)   -i$(ISIZE) -r$(RSIZE) -traceback
+CFLAGS= -O2
+
+SRCS=        gettrk_modules.gen.f gettrk_main.gen.f
+OBJS=        gettrk_modules.gen.o gettrk_main.gen.o
+
+CMD=         gettrk_gen
+
+all:	$(CMD)
+
+$(CMD):	$(OBJS)
+	$(FC) $(FFLAGS) $(LDFLAGS) -o $(@) $(OBJS) $(LIBS)
+clean:
+	-rm -f  *.o  *.mod
+install:
+	-mv $(CMD) ../../exec
