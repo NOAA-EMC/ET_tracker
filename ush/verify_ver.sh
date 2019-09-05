@@ -12,13 +12,7 @@ ymdh=$1
 cmodel=$2
 regtype=$3
 
-hostn=`hostname | cut -c1`
-if [ ${hostn} = 'v' -o ${hostn} = 'm' ]; then
-export ndate=/gpfs/dell1/nco/ops/nwprod/prod_util.v1.1.0/exec/ips/ndate
-else
 ndate=/nwprod/util/exec/ndate
-fi
-
 if [ ${cmodel} = 'sref' ]; then
    ymdh_synop=` $ndate -3 $ymdh`
  else

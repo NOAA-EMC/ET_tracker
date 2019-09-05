@@ -15,12 +15,7 @@ regtype=$3
 
 export PS4=' + mgtrak_plots_glbl.sh line $LINENO: '
 
-hostn=`hostname | cut -c1`
-if [ ${hostn} = 'v' -o ${hostn} = 'm' ]; then
-export ndate=/gpfs/dell1/nco/ops/nwprod/prod_util.v1.1.0/exec/ips/ndate
-else
 ndate=/nwprod/util/exec/ndate
-fi
 
   case ${cmodel} in
     gfs) cmodel=gfso;;

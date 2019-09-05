@@ -29,7 +29,8 @@ PERTDATA=${TRKDATA}/${pert}
 if [ ! -d ${PERTDATA} ]; then mkdir -p ${PERTDATA}; fi
 cd ${PERTDATA}
 
-##/nwprod/util/ush/setup.sh
+#/nwprod/util/ush/setup.sh
+#/gpfs/dell1/nco/ops/nwprod/mag.v3.17.4/ush/setup.sh
 
    export gfsvitdir=${gfsvitdir:-${COMROOT}/gfs/prod}
    export namvitdir=${namvitdir:-${COMROOT}/nam/prod}
@@ -50,26 +51,15 @@ if [ ! -d ${savedir} ];   then mkdir -p ${savedir}; fi
    export ushtrkdir=${ushtrkdir:-${homesyndir}/ush}
 
       echo " shell is  " $shell
-hostn=`hostname | cut -c1`
-if [ ${hostn} = 'v' -o ${hostn} = 'm' ]; then
-export ndate=/gpfs/dell1/nco/ops/nwprod/prod_util.v1.1.0/exec/ips/ndate
-export wgrib=/gpfs/dell1/nco/ops/nwprod/grib_util.v1.0.6/exec/wgrib
-export gix=/gpfs/dell1/nco/ops/nwprod/grib_util.v1.0.6/exec/grbindex
-export cgb=/gpfs/dell1/nco/ops/nwprod/grib_util.v1.0.6/exec/copygb
-export wgrib2=/gpfs/dell1/nco/ops/nwprod/grib_util.v1.0.6/exec/wgrib2
-export g2ix=/gpfs/dell1/nco/ops/nwprod/grib_util.v1.0.6/exec/grb2index
-export cgb2=/gpfs/dell1/nco/ops/nwprod/grib_util.v1.0.6/exec/copygb2
-export cnvgrib=/gpfs/dell1/nco/ops/nwprod/grib_util.v1.0.6/exec/cnvgrib
-else
-wgrib=/nwprod/util/exec/wgrib
-gix=/nwprod/util/exec/grbindex
-cgb=/nwprod/util/exec/copygb
-ndate=/nwprod/util/exec/ndate
-wgrib2=/nwprod/util/exec/wgrib2
-g2ix=/nwprod/util/exec/grb2index
-cgb2=/nwprod/util/exec/copygb2
-cnvgrib=/nwprod/util/exec/cnvgrib
-fi
+export ndate=ndate
+export wgrib=wgrib
+export gix=grbindex
+export cgb=copygb
+export wgrib2=wgrib2
+export g2ix=grb2index
+export cgb2=copygb2
+export cnvgrib=cnvgrib
+
 export gribver=${gribver:-2}
 
    cmodel=`echo ${cmodel} | tr "[A-Z]" "[a-z]"`
@@ -504,7 +494,7 @@ wgrib_ec_phase_parmlist=" GH:900|GH:850|GH:800|GH:750|GH:700|GH:650|GH:600|GH:55
        PERT=` echo ${pert} | tr '[a-z]' '[A-Z]'`        ;
        echo " "                                         ;
        set -x                                           ;
-       ecedir=${ECEDIRIN}/$CYL                          ;
+       ecedir=${ECEDIRIN}/$CYL/pgrba                          ;
        ecegfile=                                        ;
        eceifile=                                        ;
        fcstlen=240                                      ;
@@ -699,11 +689,11 @@ wgrib_ec_phase_parmlist=" GH:900|GH:850|GH:800|GH:750|GH:700|GH:650|GH:600|GH:55
 
    if [ ${modtyp} = 'global' ]; then
 
-      synvitdir=${gfsvitdir}/gfs.$PDY
+      synvitdir=${gfsvitdir}/gfs.$PDY/${CYL}
       synvitfile=gfs.t${CYL}z.syndata.tcvitals.tm00
-      synvit6ago_dir=${gfsvitdir}/gfs.${d6ago_4ymd}
+      synvit6ago_dir=${gfsvitdir}/gfs.${d6ago_4ymd}/${d6ago_hh}
       synvit6ago_file=gfs.t${d6ago_hh}z.syndata.tcvitals.tm00
-      synvit6ahead_dir=${gfsvitdir}/gfs.${d6ahead_4ymd}
+      synvit6ahead_dir=${gfsvitdir}/gfs.${d6ahead_4ymd}/${d6ahead_hh}
       synvit6ahead_file=gfs.t${d6ahead_hh}z.syndata.tcvitals.tm00
 
    else
@@ -750,11 +740,11 @@ set -xa
   fi
 ################################################
 
-      grep -h "${d6ago_str}" ${synvit6ago_dir}/${synvitfile}        \
+      grep -h "${d6ago_str}" ${synvit6ago_dir}/${synvit6ago_file}        \
                   >${PERTDATA}/tmpsynvit.${atcfout}.${regtype}.${PDY}${CYL}
       grep -h "${dnow_str}"  ${synvitdir}/${synvitfile}                  \
                  >>${PERTDATA}/tmpsynvit.${atcfout}.${regtype}.${PDY}${CYL}
-      grep -h "${d6ahead_str}" ${synvit6ahead_dir}/${synvitfile}  \
+      grep -h "${d6ahead_str}" ${synvit6ahead_dir}/${synvit6ahead_file}  \
                  >>${PERTDATA}/tmpsynvit.${atcfout}.${regtype}.${PDY}${CYL}
 
 # Take the vitals from Steve Lord's /com/gfs/prod tcvitals file,
@@ -936,7 +926,7 @@ set -xa
    if [ ${numvitrecs} -gt 0 ]; then
 
       export pgm=supvit
-##      . prep_step
+      . prep_step
 
       ln -s -f ${PERTDATA}/vitals.${atcfout}.${regtype}.${PDY}${CYL} fort.31
       ln -s -f ${PERTDATA}/vitals.upd.${atcfout}.${regtype}.${PDY}${CYL}        fort.51
@@ -1166,8 +1156,7 @@ set -xa
 
 #/com/hur/prod/global/2015/genesis.vitals.sac1.tggb.2015
 #genvitdir=/com/hur/prod/global/${syyyy6}
-#genvitdir=/com/hur/prod/global/${syyyy6}
-genvitdir=/gpfs/tp2/nco/ops/com/gentracks/prod/gentracks/${syyyy6}
+genvitdir=${gltrkdir}/${syyyy6}
 genvitfile=${genvitdir}/genesis.vitals.${atcf_vit}.${regtype}.${syyyy6}
 
 echo " "
@@ -1200,7 +1189,7 @@ if [ ${num_gen_vits} -gt 0 ]
 then
 
   export pgm=supvit_gen
-##  . prep_step
+  . prep_step
 
       ln -s -f ${PERTDATA}/genvitals.${atcfout}.${regtype}.${PDY}${CYL} fort.31
       ln -s -f ${PERTDATA}/genvitals.upd.${atcfout}.${regtype}.${PDY}${CYL}        fort.51
@@ -2024,8 +2013,7 @@ if [ ${model} -eq 4 ] ; then
       let fhr=ict*6
       echo "fhr= $fhr  fhour= $fhour"
       fmmddhh=` ${ndate} ${fhour} ${PDY}${CYL} | cut -c5- `
-      ec_hires_orig=DCD${immddhh}00${fmmddhh}0072     #for new EC data 20180529
-##      ec_hires_orig=DCD${immddhh}00${fmmddhh}001
+      ec_hires_orig=DCD${immddhh}00${fmmddhh}001
 #      ec_hires_orig=ecens_DCD${immddhh}00${fmmddhh}001
 
       total_file_cnt=$(($total_file_cnt+1))
@@ -3038,7 +3026,7 @@ write_vit=y
   # Execute the program
 
   export pgm=gettrk_gen
-##  . prep_step
+  . prep_step
 
   ln -s -f ${gribfile}                                                  fort.11
   ln -s -f ${PERTDATA}/vitals.upd.${atcfout}.${regtype}.${PDY}${shh}    fort.12
@@ -3164,34 +3152,32 @@ write_vit=y
   #   to the atcfunix file.  We only want to write out the ensemble mean track
   # to the atcfunix file, and the mean track is calculated in a separate script.
   
-##G.P.Lou
-##This portion is no longer needed
-##         if [ $cmodel != 'gefs' ]; then
-##
-##            if [ ${cmodel} = 'gfdl' ]; then
-##               auxfile=${COMOUT}/${stormenv}.${PDY}${CYL}.trackeratcfunix
-##            else
-##               auxfile=${PERTDATA}/trak.${atcfout}.atcfunix.${regtype}.${PDY}${CYL}
-##            fi
-##
-##            sort -k6 ${auxfile} | sort -k1 -k2 -k12  >atcfunix.sorted
-##
-##            old_string="XX, XX"
-##
-##            ict=0
-##            while read unixrec
-##            do
-##               storm_string=` echo "${unixrec}" | cut -c1-6`
-##               if [ "${storm_string}" = "${old_string}" ]; then
-##                  echo "${unixrec}" >>atcfunix_file.${ict}
-##               else
-##                  let ict=ict+1
-##                  echo "${unixrec}"  >atcfunix_file.${ict}
-##                  old_string="${storm_string}"
-##               fi
-##            done <atcfunix.sorted
-##
-##         fi
+         if [ $cmodel != 'gefs' ]; then
+
+            if [ ${cmodel} = 'gfdl' ]; then
+               auxfile=${COMOUT}/${stormenv}.${PDY}${CYL}.trackeratcfunix
+            else
+               auxfile=${PERTDATA}/trak.${atcfout}.atcfunix.${regtype}.${PDY}${CYL}
+            fi
+
+            sort -k6 ${auxfile} | sort -k1 -k2 -k12  >atcfunix.sorted
+
+            old_string="XX, XX"
+
+            ict=0
+            while read unixrec
+            do
+               storm_string=` echo "${unixrec}" | cut -c1-6`
+               if [ "${storm_string}" = "${old_string}" ]; then
+                  echo "${unixrec}" >>atcfunix_file.${ict}
+               else
+                  let ict=ict+1
+                  echo "${unixrec}"  >atcfunix_file.${ict}
+                  old_string="${storm_string}"
+               fi
+            done <atcfunix.sorted
+
+         fi
 
       fi
 

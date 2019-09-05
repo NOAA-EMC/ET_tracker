@@ -19,7 +19,7 @@ yyyy=$2
 basinchar=` echo $stid | cut -c3-3 | tr '[A-Z]' '[a-z]'`
 
 if [ ${yyyy} -ge 2003 ]; then
-  vitdir=/${COMROOTp1}/arch/prod/syndat
+  vitdir=${archsyndir}
   if [ $basinchar = 'l' -o $basinchar = 'e' -o $basinchar = 'c' ]; then
     grep -i " $stid" ${vitdir}/syndat_tcvitals.${yyyy}      | \
             awk '{ if (length($0) > 100) {print $0} }'      | \
