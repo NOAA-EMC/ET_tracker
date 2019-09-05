@@ -11,9 +11,9 @@ set -x
 # 
 # obtain unique process id (pid) and make temp directories
 #
+export DATA=${DATA:-/gpfs/dell2/ptmp/Guang.Ping.Lou/tmptrk}
 export pid=${pid:-$$}
-#export DATA=${DATA:-$DATAROOT/$jobid}
-export DATA=/ptmpp2/Guang.Ping.Lou/tmptrk
+export DATA=${DATA:-$DATAROOT/$jobid}
 mkdir -p $DATA
 cd $DATA
 export cycle=${cycle:-t${cyc}z}
@@ -52,13 +52,15 @@ export SENDOMB=${SENDOMB:-YES}
 ####################################
 # Specify TRACKER version number
 ####################################
+TRACKER_VERSION=v3.4.9
 export TRACKER_VERSION=${TRACKER_VERSION:-${genesis_tracker_ver}}
 
 ################################
 # Set up the HOME directory
-################################
-#export HOMEtracker=${HOMEtracker:-${NWROOT}/genesis_tracker.$TRACKER_VERSION}
-export HOMEtracker=/meso/save/Guang.Ping.Lou/EMC_verif/trk_glbl/tags/genesis_tracker.v3.4.7
+###########################
+export HOMEtracker=/gpfs/dell2/emc/verification/noscrub/Guang.Ping.Lou/genesis_tracker.v3.4.9
+export HOMEtracker=${HOMEtracker:-${NWROOT}/genesis_tracker.$TRACKER_VERSION}
+#export HOMEtracker=/meso/save/Guang.Ping.Lou/EMC_verif/trk_glbl/tags/genesis_tracker.v3.4.7
 export SCRIPTStrkr=$HOMEtracker/scripts
 export EXECtrkr=$HOMEtracker/exec
 export FIXtrkr=$HOMEtracker/fix
@@ -68,8 +70,16 @@ export USHtrkr=$HOMEtracker/ush
 ##############################
 # Load modules
 ##############################
-module load grib_util
-module load prod_util
+. $MODULESHOME/init/ksh
+module purge
+module load EnvVars/1.0.2
+module load ips/18.0.1.163
+module load impi/18.0.1
+module load lsf/10.1
+module load prod_util/1.1.1
+module load grib_util/1.1.3
+module load prod_envir/1.0.2
+module load CFP/2.0.1
 
 ##############################
 # Run setpdy and initialize PDY variables
@@ -86,60 +96,61 @@ fi
 # Define COMIN and COMOUT directory
 ###############################################
 
+#comment out following two lines (COMROOTp3,COMROOT) before submit to NCO
+##export COMROOTp3=/gpfs/dell1/nco/ops/com
+#export COMROOTp3=/gpfs/dell2/ptmp/Guang.Ping.Lou/com/p1top3
+#export COMROOThps=/gpfs/hps/nco/ops/com
+#export DCOMROOT=/gpfs/tp1/nco/ops/dcom/
+#export COMROOT=$COMROOTp3
+
 # COMIN for gfs, nam and arch
-export COMROOTp1=/gpfs/gp1/nco/ops/com
-export COMROOT=/gpfs/gp2/nco/ops/com
-export COMROOThps=/gpfs/hps/nco/ops/com
-export DCOMROOT=/gpfs/gp1/nco/ops/dcom
-export namvitdir=${COMROOT}/nam/prod
+export namvitdir=$(compath.py nam/prod)
 export gfsvitdir=$(compath.py gfs/prod)
-export archsyndir=${COMROOTp1}/arch/prod/syndat
+export archsyndir=${COMROOTp3}/gfs/prod/syndat
 # Input and output
-#export COMGLTRK=${COMROOT}/gentracks/${envir}/gentracks
-export COMGLTRK=/meso/save/Guang.Ping.Lou/EMC_verif/trk_glbl/tags/genesis_tracker.v3.4.7
+export COMGLTRK=${COMROOTp3}/gentracks/${envir}/gentracks
 
 # output
-export tmscrdir=${COMROOTp1}/arch/${envir}
+export tmscrdir=${COMROOTp3}/arch/${envir}
 
 case $cmodel in
-  gefs)  export COMIN=${COMROOT}/$NET/prod/${RUN}.$PDY/$CYC/pgrb2a
-         export COMINtrack=${COMROOT}/$NET/prod/${RUN}.$PDY/$CYC/track
-         export COMOUT=${COMROOT}/$NET/${envir}/${RUN}.$PDY/$CYC/track
+  gefs)  export COMIN=$(compath.py ${NET}/prod/${RUN}.$PDY)/$CYC/pgrb2a
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
          ;;
   fens)  export COMIN=${DCOMROOT}/us007003/${PDY}/wgrbbul/fnmocens_gb2
-         export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY/$CYC/track
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
          ;;
-  sref)  export COMIN=${COMROOT}/$NET/prod/${RUN}.$PDY/$CYC/pgrb
-         export COMOUT=${COMROOT}/$NET/${envir}/${RUN}.$PDY/$CYC/track
+  sref)  export COMIN=$(compath.py $NET/prod/${RUN}.$PDY)/$CYC/pgrb
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
          ;;
   ecmwf) export COMIN=${DCOMROOT}/$NET/${PDY}/wgrbbul/${RUN}
-         export COMOUT=${COMROOTp1}/${RUN}/${envir}/${RUN}.${PDY}
+         export COMOUT=${COMROOTp3}/${RUN}/${envir}/${RUN}.${PDY}
          ;;
   eens) 
          export COMIN=${COMROOTp1}/$NET/prod/${RUN}.$PDY
-         export ECEDIRIN=${COMROOT}/gens/prod/ecme.${PDY}
-         export COMOUT=${COMROOTp1}/$NET/${envir}/${RUN}.$PDY
+         export ECEDIRIN=${COMROOThps}/ens_tracker/prod/ecme.${PDY}
+         export COMOUT=${COMROOTp3}/$NET/${envir}/${RUN}.$PDY
          ;;
-  cens)  export COMIN=${COMROOThps}/naefs/para/${RUN}.$PDY/$CYC/pgrb2ap5
-         export COMOUT=${COMROOT}/$NET/${envir}/${RUN}.$PDY/$CYC/track
+  cens)  export COMIN=${COMROOThps}/naefs/prod/${RUN}.$PDY/$CYC/pgrb2ap5
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
          ;;
    cmc)  export COMIN=/${DCOMROOT}/us007003/$PDY/wgrbbul/cmc_gdps_25km
-         export COMOUT=${COMROOTp1}/${RUN}/${envir}/${RUN}.${PDY}/track
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.${PDY}/track
          ;;
-   gfs)  export COMIN=$(compath.py ${NET}/prod/${RUN}.$PDY)
-         export COMOUT=${COMROOThps}/${NET}/${envir}/${RUN}.$PDY
+   gfs)  export COMIN=$(compath.py ${NET}/prod/${RUN}.$PDY)/$CYC
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
          ;;
    nvgm) export COMIN=${DCOMROOT}/us007003/$RUN
-         export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.${PDY}/track
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.${PDY}/track
          ;;
-  ukmet) export COMIN=${COMROOT}/gens/${envir}/$RUN.${PDY}/${CYC}/pgrba
-         export COMOUT=${COMROOThps}/$NET/${envir}/${RUN}.${PDY}/track
+  ukmet) export COMIN=${COMROOThps}/ens_tracker/prod/$RUN.${PDY}/${CYC}/pgrba
+         export COMOUT=${COMROOTp3}/$NET/${envir}/${RUN}.${PDY}/track
          ;;
   nam)   export COMIN=$(compath.py ${NET}/prod/${RUN}.$PDY)
-         export COMOUT=${COMROOT}/${NET}/${envir}/${RUN}.$PDY
+         export COMOUT=${COMROOTp3}/gentracks/${envir}/${RUN}.$PDY/track
          ;;
    *)    export COMIN=${COMROOTp1}/$NET/prod/${RUN}.${PDY}
-         export COMOUT=${COMROOTp1}/$NET/${envir}/${RUN}.${PDY}  
+         export COMOUT=${COMROOTp3}/$NET/${envir}/${RUN}.${PDY}  
          ;;
 esac
 
@@ -175,8 +186,7 @@ done
 cat $pgmout
 
 date
-
 if [ "$KEEPDATA" != YES ]; then
    cd $DATAROOT
-#   rm -rf $DATA
+   rm -rf $DATA
 fi
