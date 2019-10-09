@@ -19,7 +19,7 @@ FCOMP=  ifort -nofree
 FFLAGS= -O0 -g -fpe0 -I $(INC) -i$(ISIZE) -r$(RSIZE) -traceback
 
 gettrk_gen: gettrk_main.gen.f gettrk_modules.gen.f
-	$(FCOMP) $(FFLAGS) gettrk_modules.gen.f gettrk_main.gen.f -o gettrk_gen $(LIBS)
+	$(FCOMP) $(FFLAGS) gettrk_modules.gen.f gettrk_main.gen.f -o gettrk_gen $(LIBS) 
 
 ##gettrk_modules.gen.o: gettrk_modules.gen.f
 ##	$(FCOMP) $(FFLAGS) gettrk_modules.gen.f -o gettrk_modules.gen.o

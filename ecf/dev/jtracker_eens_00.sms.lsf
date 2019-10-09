@@ -6,7 +6,7 @@
 #BSUB -W 1:30
 #BSUB -P FV3GFS-T2O
 #BSUB -R "span[ptile=16]"
-#BSUB -J eens_trk
+#BSUB -J eens_trk_00
 # EXPORT list here
 set -x
 export envir=prod

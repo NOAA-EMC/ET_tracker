@@ -45,21 +45,12 @@ if [ ! -d ${savedir} ];   then mkdir -p ${savedir}; fi
 
    export TPCATdir=/tpcprd/atcf
 
-   export homesyndir=${homesyndir:-/nwprod/util}
+   # JY export homesyndir=${homesyndir:-/nwprod/util}
    export exectrkdir=${exectrkdir:-${EXECtrkr}}
 #   export exectrkdir=/meso/save/Guang.Ping.Lou/genesis_tracker.v3.4.0/exec
-   export ushtrkdir=${ushtrkdir:-${homesyndir}/ush}
+   # JY export ushtrkdir=${ushtrkdir:-${homesyndir}/ush}
 
       echo " shell is  " $shell
-export ndate=ndate
-export wgrib=wgrib
-export gix=grbindex
-export cgb=copygb
-export wgrib2=wgrib2
-export g2ix=grb2index
-export cgb2=copygb2
-export cnvgrib=cnvgrib
-
 export gribver=${gribver:-2}
 
    cmodel=`echo ${cmodel} | tr "[A-Z]" "[a-z]"`
@@ -494,7 +485,8 @@ wgrib_ec_phase_parmlist=" GH:900|GH:850|GH:800|GH:750|GH:700|GH:650|GH:600|GH:55
        PERT=` echo ${pert} | tr '[a-z]' '[A-Z]'`        ;
        echo " "                                         ;
        set -x                                           ;
-       ecedir=${ECEDIRIN}/$CYL/pgrba                          ;
+       # JY ecedir=${ECEDIRIN}/$CYL/pgrba                          ;
+       ecedir=${COMIN}/$CYL/pgrba                          ;
        ecegfile=                                        ;
        eceifile=                                        ;
        fcstlen=240                                      ;
@@ -569,7 +561,7 @@ wgrib_ec_phase_parmlist=" GH:900|GH:850|GH:800|GH:750|GH:700|GH:650|GH:600|GH:55
                    120 126 132 138 144 150 156 162 168 174
                    180 99 99 99 99 99 99 99
                    99 99 99 99 99 99 99 99 99 99 99 99 99 99
-                   99 99 99 99 99 99 99 99 99 99 99 99' ;
+                   99 99 99 99 99 99 99 99 99 99 99 99 99' ;
          atcfnum=39                                       ;
          atcfname="cmc "                                  ;
          atcfout="cmc"                                    ;
@@ -664,11 +656,11 @@ wgrib_ec_phase_parmlist=" GH:900|GH:850|GH:800|GH:750|GH:700|GH:650|GH:600|GH:55
 # realizes there are not any storms to process.
 
   if [ ${cmodel} = 'gfs' -o ${cmodel} = 'nam' -o ${cmodel} = 'gefs' ]; then
-   d6ago_ymdh=` ${ndate} -6 ${PDY}${CYL}`
+   d6ago_ymdh=` ${NDATE} -6 ${PDY}${CYL}`
    elif [ ${cmodel} = 'sref' ]; then
-   d6ago_ymdh=` ${ndate} -9 ${PDY}${CYL}`
+   d6ago_ymdh=` ${NDATE} -9 ${PDY}${CYL}`
    else
-   d6ago_ymdh=` ${ndate} -12 ${PDY}${CYL}`
+   d6ago_ymdh=` ${NDATE} -12 ${PDY}${CYL}`
   fi
    d6ago_4ymd=` echo ${d6ago_ymdh} | cut -c1-8`
    d6ago_ymd=` echo ${d6ago_ymdh} | cut -c3-8`
@@ -676,11 +668,11 @@ wgrib_ec_phase_parmlist=" GH:900|GH:850|GH:800|GH:750|GH:700|GH:650|GH:600|GH:55
    d6ago_str="${d6ago_ymd} ${d6ago_hh}00"
 
   if [ ${cmodel} = 'gfs' -o ${cmodel} = 'nam' -o ${cmodel} = 'gefs' ]; then
-   d6ahead_ymdh=` ${ndate} 6 ${PDY}${CYL}`
+   d6ahead_ymdh=` ${NDATE} 6 ${PDY}${CYL}`
   elif [ ${cmodel} = 'sref' ]; then
-   d6ahead_ymdh=` ${ndate} 9 ${PDY}${CYL}`
+   d6ahead_ymdh=` ${NDATE} 9 ${PDY}${CYL}`
    else
-   d6ahead_ymdh=` ${ndate} 12 ${PDY}${CYL}`
+   d6ahead_ymdh=` ${NDATE} 12 ${PDY}${CYL}`
   fi
    d6ahead_4ymd=` echo ${d6ahead_ymdh} | cut -c1-8`
    d6ahead_ymd=` echo ${d6ahead_ymdh} | cut -c3-8`
@@ -721,19 +713,19 @@ set -xa
 # In order to include HPC tcvitals in SREF tracking, 
 # change timing 
   if [ ${cmodel} = 'sref' ]; then
-   d6ago_ymdh=` ${ndate} -9 ${PDY}${CYL}`
+   d6ago_ymdh=` ${NDATE} -9 ${PDY}${CYL}`
    d6ago_4ymd=` echo ${d6ago_ymdh} | cut -c1-8`
    d6ago_ymd=` echo ${d6ago_ymdh} | cut -c3-8`
    d6ago_hh=`  echo ${d6ago_ymdh} | cut -c9-10`
    d6ago_str="${d6ago_ymd} ${d6ago_hh}00"
 
-   d6ahead_ymdh=` ${ndate} 3 ${PDY}${CYL}`
+   d6ahead_ymdh=` ${NDATE} 3 ${PDY}${CYL}`
    d6ahead_4ymd=` echo ${d6ahead_ymdh} | cut -c1-8`
    d6ahead_ymd=` echo ${d6ahead_ymdh} | cut -c3-8`
    d6ahead_hh=`  echo ${d6ahead_ymdh} | cut -c9-10`
    d6ahead_str="${d6ahead_ymd} ${d6ahead_hh}00"
 
-   d3ago_ymdh=` ${ndate} -3 ${PDY}${CYL}`
+   d3ago_ymdh=` ${NDATE} -3 ${PDY}${CYL}`
    d3ago_ymd=` echo ${d3ago_ymdh} | cut -c3-8`
    d3ago_hh=`  echo ${d3ago_ymdh} | cut -c9-10`
    dnow_str="${d3ago_ymd} ${d3ago_hh}00"
@@ -809,7 +801,7 @@ set -xa
 # tracking program.
 #--------------------------------------------------------------#
 
-   ymdh6ago=` ${ndate} -6 ${PDY}${CYL}`
+   ymdh6ago=` ${NDATE} -6 ${PDY}${CYL}`
    syy6=`echo ${ymdh6ago} | cut -c3-4`
    smm6=`echo ${ymdh6ago} | cut -c5-6`
    sdd6=`echo ${ymdh6ago} | cut -c7-8`
@@ -817,7 +809,7 @@ set -xa
    syyyy6=`echo ${ymdh6ago} | cut -c1-4`
    symd6=${syy6}${smm6}${sdd6}
 
-   ymdh6ahead=` ${ndate} 6 ${PDY}${CYL}`
+   ymdh6ahead=` ${NDATE} 6 ${PDY}${CYL}`
    syyp6=`echo ${ymdh6ahead} | cut -c3-4`
    smmp6=`echo ${ymdh6ahead} | cut -c5-6`
    sddp6=`echo ${ymdh6ahead} | cut -c7-8`
@@ -836,7 +828,7 @@ set -xa
 # In order to include HPC tcvitals in SREF tracking, 
 # change timing 
   if [ ${cmodel} = 'sref' ]; then
-   ymdh6ago=` ${ndate} -9 ${PDY}${CYL}`
+   ymdh6ago=` ${NDATE} -9 ${PDY}${CYL}`
    syy6=`echo ${ymdh6ago} | cut -c3-4`
    smm6=`echo ${ymdh6ago} | cut -c5-6`
    sdd6=`echo ${ymdh6ago} | cut -c7-8`
@@ -844,7 +836,7 @@ set -xa
    syyyy6=`echo ${ymdh6ago} | cut -c1-4`
    symd6=${syy6}${smm6}${sdd6}
 
-   ymdh6ahead=` ${ndate} 3 ${PDY}${CYL}`
+   ymdh6ahead=` ${NDATE} 3 ${PDY}${CYL}`
    syyp6=`echo ${ymdh6ahead} | cut -c3-4`
    smmp6=`echo ${ymdh6ahead} | cut -c5-6`
    sddp6=`echo ${ymdh6ahead} | cut -c7-8`
@@ -852,7 +844,7 @@ set -xa
    syyyyp6=`echo ${ymdh6ahead} | cut -c1-4`
    symdp6=${syyp6}${smmp6}${sddp6}
 
-   ymdh3ago=` ${ndate} -3 ${PDY}${CYL}`
+   ymdh3ago=` ${NDATE} -3 ${PDY}${CYL}`
    syy3=`echo ${ymdh3ago} | cut -c3-4`
    smm3=`echo ${ymdh3ago} | cut -c5-6`
    sdd3=`echo ${ymdh3ago} | cut -c7-8`
@@ -1086,13 +1078,13 @@ fi
 set -xa
 #after  tcvitals, return to normal time
   if [ ${cmodel} = 'sref' ]; then
-   d6ago_ymdh=` ${ndate} -6 ${PDY}${CYL}`
+   d6ago_ymdh=` ${NDATE} -6 ${PDY}${CYL}`
    d6ago_4ymd=` echo ${d6ago_ymdh} | cut -c1-8`
    d6ago_ymd=` echo ${d6ago_ymdh} | cut -c3-8`
    d6ago_hh=`  echo ${d6ago_ymdh} | cut -c9-10`
    d6ago_str="${d6ago_ymd} ${d6ago_hh}00"
 
-   d6ahead_ymdh=` ${ndate} 6 ${PDY}${CYL}`
+   d6ahead_ymdh=` ${NDATE} 6 ${PDY}${CYL}`
    d6ahead_4ymd=` echo ${d6ahead_ymdh} | cut -c1-8`
    d6ahead_ymd=` echo ${d6ahead_ymdh} | cut -c3-8`
    d6ahead_hh=`  echo ${d6ahead_ymdh} | cut -c9-10`
@@ -1100,7 +1092,7 @@ set -xa
 
    dnow_str="${symd} ${CYL}00"
 
-   ymdh6ago=` ${ndate} -6 ${PDY}${CYL}`
+   ymdh6ago=` ${NDATE} -6 ${PDY}${CYL}`
    syy6=`echo ${ymdh6ago} | cut -c3-4`
    smm6=`echo ${ymdh6ago} | cut -c5-6`
    sdd6=`echo ${ymdh6ago} | cut -c7-8`
@@ -1108,7 +1100,7 @@ set -xa
    syyyy6=`echo ${ymdh6ago} | cut -c1-4`
    symd6=${syy6}${smm6}${sdd6}
 
-   ymdh6ahead=` ${ndate} 6 ${PDY}${CYL}`
+   ymdh6ahead=` ${NDATE} 6 ${PDY}${CYL}`
    syyp6=`echo ${ymdh6ahead} | cut -c3-4`
    smmp6=`echo ${ymdh6ahead} | cut -c5-6`
    sddp6=`echo ${ymdh6ahead} | cut -c7-8`
@@ -1123,19 +1115,19 @@ set -xa
        m12=-12
        p12=12
 
-   d6ago_ymdh=` ${ndate} $m12 ${PDY}${CYL}`
+   d6ago_ymdh=` ${NDATE} $m12 ${PDY}${CYL}`
    d6ago_4ymd=` echo ${d6ago_ymdh} | cut -c1-8`
    d6ago_ymd=` echo ${d6ago_ymdh} | cut -c3-8`
    d6ago_hh=`  echo ${d6ago_ymdh} | cut -c9-10`
    d6ago_str="${d6ago_ymd} ${d6ago_hh}00"
 
-   d6ahead_ymdh=` ${ndate} $p12 ${PDY}${CYL}`
+   d6ahead_ymdh=` ${NDATE} $p12 ${PDY}${CYL}`
    d6ahead_4ymd=` echo ${d6ahead_ymdh} | cut -c1-8`
    d6ahead_ymd=` echo ${d6ahead_ymdh} | cut -c3-8`
    d6ahead_hh=`  echo ${d6ahead_ymdh} | cut -c9-10`
    d6ahead_str="${d6ahead_ymd} ${d6ahead_hh}00"
 
-   ymdh6ago=` ${ndate} $m12 ${PDY}${CYL}`
+   ymdh6ago=` ${NDATE} $m12 ${PDY}${CYL}`
    syy6=`echo ${ymdh6ago} | cut -c3-4`
    smm6=`echo ${ymdh6ago} | cut -c5-6`
    sdd6=`echo ${ymdh6ago} | cut -c7-8`
@@ -1143,7 +1135,7 @@ set -xa
    syyyy6=`echo ${ymdh6ago} | cut -c1-4`
    symd6=${syy6}${smm6}${sdd6}
 
-   ymdh6ahead=` ${ndate} $p12 ${PDY}${CYL}`
+   ymdh6ahead=` ${NDATE} $p12 ${PDY}${CYL}`
    syyp6=`echo ${ymdh6ahead} | cut -c3-4`
    smmp6=`echo ${ymdh6ahead} | cut -c5-6`
    sddp6=`echo ${ymdh6ahead} | cut -c7-8`
@@ -1322,7 +1314,7 @@ set -x
             if [ -s ${PERTDATA}/tmpnamixfile ]; then
                rm ${PERTDATA}/tmpnamixfile
             fi
-            $gix ${namdir}/${namgfile}${fhour}.tm00 ${PERTDATA}/tmpnamixfile
+            $GRBINDEX ${namdir}/${namgfile}${fhour}.tm00 ${PERTDATA}/tmpnamixfile
             x1=${PERTDATA}/tmpnamixfile
          fi
 
@@ -1334,22 +1326,22 @@ set -x
   
          g1=${namdir}/${namgfile}${fhour}.tm00
      
-         $cgb -g"$grid" -k'4*-1 33 100 850' $g1 $x1 ${PERTDATA}/namllu850.grb.f${fhour};   rcc1=$?
-         $cgb -g"$grid" -k'4*-1 33 100 700' $g1 $x1 ${PERTDATA}/namllu700.grb.f${fhour};   rcc2=$?
-         $cgb -g"$grid" -k'4*-1 33 100 500' $g1 $x1 ${PERTDATA}/namllu500.grb.f${fhour};   rcc3=$?
-         $cgb -g"$grid" -k'4*-1 33 105 10'  $g1 $x1 ${PERTDATA}/namllu10m.grb.f${fhour};   rcc4=$?
-         $cgb -g"$grid" -k'4*-1 41 100 850' $g1 $x1 ${PERTDATA}/namllav850.grb.f${fhour};  rcc5=$?
-         $cgb -g"$grid" -k'4*-1 41 100 700' $g1 $x1 ${PERTDATA}/namllav700.grb.f${fhour};  rcc6=$?
-         $cgb -g"$grid" -k'4*-1  7 100 850' $g1 $x1 ${PERTDATA}/namllz850.grb.f${fhour};   rcc7=$?
-         $cgb -g"$grid" -k'4*-1  7 100 700' $g1 $x1 ${PERTDATA}/namllz700.grb.f${fhour};   rcc8=$?
-         $cgb -g"$grid" -k'4*-1  2 102   0' $g1 $x1 ${PERTDATA}/namllmslp.grb.f${fhour};   rcc9=$?
+         $COPYGB -g"$grid" -k'4*-1 33 100 850' $g1 $x1 ${PERTDATA}/namllu850.grb.f${fhour};   rcc1=$?
+         $COPYGB -g"$grid" -k'4*-1 33 100 700' $g1 $x1 ${PERTDATA}/namllu700.grb.f${fhour};   rcc2=$?
+         $COPYGB -g"$grid" -k'4*-1 33 100 500' $g1 $x1 ${PERTDATA}/namllu500.grb.f${fhour};   rcc3=$?
+         $COPYGB -g"$grid" -k'4*-1 33 105 10'  $g1 $x1 ${PERTDATA}/namllu10m.grb.f${fhour};   rcc4=$?
+         $COPYGB -g"$grid" -k'4*-1 41 100 850' $g1 $x1 ${PERTDATA}/namllav850.grb.f${fhour};  rcc5=$?
+         $COPYGB -g"$grid" -k'4*-1 41 100 700' $g1 $x1 ${PERTDATA}/namllav700.grb.f${fhour};  rcc6=$?
+         $COPYGB -g"$grid" -k'4*-1  7 100 850' $g1 $x1 ${PERTDATA}/namllz850.grb.f${fhour};   rcc7=$?
+         $COPYGB -g"$grid" -k'4*-1  7 100 700' $g1 $x1 ${PERTDATA}/namllz700.grb.f${fhour};   rcc8=$?
+         $COPYGB -g"$grid" -k'4*-1  2 102   0' $g1 $x1 ${PERTDATA}/namllmslp.grb.f${fhour};   rcc9=$?
 
          if [ $rcc1 -eq 134 -o $rcc2 -eq 134 -o $rcc3 -eq 134 -o $rcc4 -eq 134 -o $rcc5 -eq 134 -o \
             $rcc6 -eq 134 -o $rcc7 -eq 134 -o $rcc8 -eq 134 -o $rcc9 -eq 134 ]
          then
             set +x
             echo " "
-            echo "!!! ERROR using $cgb to interpolate nam data.  We will stop"
+            echo "!!! ERROR using $COPYGB to interpolate nam data.  We will stop"
             echo "!!! execution because some variables may have been copied "
             echo "!!! okay, while some obviously have not, and that could lead"
             echo "!!! to unreliable results from the tracker.  Check to make"
@@ -1372,7 +1364,7 @@ set -x
         then
           echo ${namdir}/${namgfile}${fhour}.tm00.grib2
           # Try to wgrib the primary file....
-          $wgrib2 -s ${namdir}/${namgfile}${fhour}.tm00.grib2 > namifile.ix
+          $WGRIB2 -s ${namdir}/${namgfile}${fhour}.tm00.grib2 > namifile.ix
           gfile=${namdir}/${namgfile}${fhour}.tm00.grib2
         else
             set +x
@@ -1400,14 +1392,14 @@ set -x
           case ${parm} in
             "SurfaceU")
               grep "UGRD:10 m " namifile.ix | \
-                              $wgrib2 -i $gfile -append -grib \
+                              $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/namgribfile.${PDY}${CYL}.f${fhour} ;;
             "SurfaceV")
               grep "VGRD:10 m " namifile.ix | \
-                              $wgrib2 -i $gfile -append -grib \
+                              $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/namgribfile.${PDY}${CYL}.f${fhour} ;;
                      *)
-              grep "${parm}" namifile.ix | $wgrib2 -i $gfile -append -grib \
+              grep "${parm}" namifile.ix | $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/namgribfile.${PDY}${CYL}.f${fhour} ;;
           esac
         done
@@ -1425,13 +1417,13 @@ set -x
     done
   
     if [ ${gribver} -eq 1 ]; then
-      $gix ${PERTDATA}/namlatlon.pgrb.${PDY}${CYL} ${PERTDATA}/namlatlon.pgrb.ix.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/namlatlon.pgrb.${PDY}${CYL} ${PERTDATA}/namlatlon.pgrb.ix.${PDY}${CYL}
     else
-      ${wgrib2} ${PERTDATA}/namgribfile.${PDY}${CYL} \
+      ${WGRIB2} ${PERTDATA}/namgribfile.${PDY}${CYL} \
               -new_grid_vectors none       \
               -new_grid latlon "140:421:0.5"  "0:180:0.5"  \
               namlatlon.pgrb.${PDY}${CYL}
-      $g2ix ${PERTDATA}/namlatlon.pgrb.${PDY}${CYL} ${PERTDATA}/namlatlon.pgrb.ix.${PDY}${CYL}
+      $GRB2INDEX ${PERTDATA}/namlatlon.pgrb.${PDY}${CYL} ${PERTDATA}/namlatlon.pgrb.ix.${PDY}${CYL}
     fi
 
       gribfile=${PERTDATA}/namlatlon.pgrb.${PDY}${CYL}
@@ -1460,8 +1452,8 @@ set -x
 
    if [ ${model} -eq 9 ]; then
 
-      origwestlon=`$wgrib -V ${gfdldir}/${gfdlgfile}00 | grep long | head -1 | awk '{printf ("%d",$2*1000)}'`
-      origeastlon=`$wgrib -V ${gfdldir}/${gfdlgfile}00 | grep long | head -1 | awk '{printf ("%d",$4*1000)}'`
+      origwestlon=`$WGRIB -V ${gfdldir}/${gfdlgfile}00 | grep long | head -1 | awk '{printf ("%d",$2*1000)}'`
+      origeastlon=`$WGRIB -V ${gfdldir}/${gfdlgfile}00 | grep long | head -1 | awk '{printf ("%d",$4*1000)}'`
       let newwestlon=origwestlon-5000
       let neweastlon=origeastlon+5000
 
@@ -1516,7 +1508,7 @@ set -x
             if [ -s ${PERTDATA}/tmpgfdlixfile ]; then
                rm ${PERTDATA}/tmpgfdlixfile
             fi
-            $gix ${gfdldir}/${gfdlgfile}${fhour} ${PERTDATA}/tmpgfdlixfile
+            $GRBINDEX ${gfdldir}/${gfdlgfile}${fhour} ${PERTDATA}/tmpgfdlixfile
             x1=${PERTDATA}/tmpgfdlixfile
          fi
 
@@ -1528,18 +1520,18 @@ set -x
 
          g1=${gfdldir}/${gfdlgfile}${fhour}
 
-         $cgb -g"$grid" -k'4*-1 33 100 850' $g1 $x1 ${PERTDATA}/gfdlu850.grb.f${fhour};   rcc1=$?
-         $cgb -g"$grid" -k'4*-1 33 100 700' $g1 $x1 ${PERTDATA}/gfdlu700.grb.f${fhour};   rcc2=$?
-         $cgb -g"$grid" -k'4*-1 33 100 500' $g1 $x1 ${PERTDATA}/gfdlu500.grb.f${fhour};   rcc3=$?
-         $cgb -g"$grid" -k'4*-1 33 105  35' $g1 $x1 ${PERTDATA}/gfdlu35m.grb.f${fhour};   rcc4=$?
-         $cgb -g"$grid" -k'4*-1  7 100 850' $g1 $x1 ${PERTDATA}/gfdlz850.grb.f${fhour};   rcc7=$?
-         $cgb -g"$grid" -k'4*-1  7 100 700' $g1 $x1 ${PERTDATA}/gfdlz700.grb.f${fhour};   rcc8=$?
-         $cgb -g"$grid" -k'4*-1  2 102   0' $g1 $x1 ${PERTDATA}/gfdlmslp.grb.f${fhour};   rcc9=$?
+         $COPYGB -g"$grid" -k'4*-1 33 100 850' $g1 $x1 ${PERTDATA}/gfdlu850.grb.f${fhour};   rcc1=$?
+         $COPYGB -g"$grid" -k'4*-1 33 100 700' $g1 $x1 ${PERTDATA}/gfdlu700.grb.f${fhour};   rcc2=$?
+         $COPYGB -g"$grid" -k'4*-1 33 100 500' $g1 $x1 ${PERTDATA}/gfdlu500.grb.f${fhour};   rcc3=$?
+         $COPYGB -g"$grid" -k'4*-1 33 105  35' $g1 $x1 ${PERTDATA}/gfdlu35m.grb.f${fhour};   rcc4=$?
+         $COPYGB -g"$grid" -k'4*-1  7 100 850' $g1 $x1 ${PERTDATA}/gfdlz850.grb.f${fhour};   rcc7=$?
+         $COPYGB -g"$grid" -k'4*-1  7 100 700' $g1 $x1 ${PERTDATA}/gfdlz700.grb.f${fhour};   rcc8=$?
+         $COPYGB -g"$grid" -k'4*-1  2 102   0' $g1 $x1 ${PERTDATA}/gfdlmslp.grb.f${fhour};   rcc9=$?
 
          if [ $rcc1 -eq 134 -o $rcc2 -eq 134 -o $rcc3 -eq 134 -o $rcc4 -eq 134 -o $rcc7 -eq 134 -o $rcc8 -eq 134 -o $rcc9 -eq 134 ]; then
             set +x
             echo " "
-            echo "!!! ERROR using $cgb to interpolate gfdl data.  We will stop"
+            echo "!!! ERROR using $COPYGB to interpolate gfdl data.  We will stop"
             echo "!!! execution because some variables may have been copied "
             echo "!!! okay, while some obviously have not, and that could lead"
             echo "!!! to unreliable results from the tracker.  Check to make"
@@ -1557,7 +1549,7 @@ set -x
  
       done
 
-      $gix ${PERTDATA}/gfdl.${stormenv}.pgrb.${PDY}${CYL} ${PERTDATA}/gfdl.${stormenv}.pgrb.ix.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/gfdl.${stormenv}.pgrb.${PDY}${CYL} ${PERTDATA}/gfdl.${stormenv}.pgrb.ix.${PDY}${CYL}
       gribfile=${PERTDATA}/gfdl.${stormenv}.pgrb.${PDY}${CYL}
       ixfile=${PERTDATA}/gfdl.${stormenv}.pgrb.ix.${PDY}${CYL}
 
@@ -1605,7 +1597,7 @@ then
         then
           # Try to wgrib the primary file....
           gfile=${globaldir}/${globalgfile}${fhour}
-          $wgrib -s ${gfile} >globalgfile.ix
+          $WGRIB -s ${gfile} >globalgfile.ix
         else
             set +x
             echo " "
@@ -1632,15 +1624,15 @@ then
           case ${parm} in
             "SurfaceU")
               grep "UGRD:10 m " globalgfile.ix | \
-                          $wgrib -s $gfile -i -grib -append \
+                          $WGRIB -s $gfile -i -grib -append \
                           -o ${PERTDATA}/master.globalgribfile.${PDY}${CYL}.f${fhour} ;;
             "SurfaceV")
               grep "VGRD:10 m " globalgfile.ix | \
-                          $wgrib -s $gfile -i -grib -append \
+                          $WGRIB -s $gfile -i -grib -append \
                           -o ${PERTDATA}/master.globalgribfile.${PDY}${CYL}.f${fhour} ;;
                      *)
               grep "${parm}" globalgfile.ix | \
-                          $wgrib -s $gfile -i -grib -append \
+                          $WGRIB -s $gfile -i -grib -append \
                           -o ${PERTDATA}/master.globalgribfile.${PDY}${CYL}.f${fhour} ;;
           esac
         done
@@ -1662,7 +1654,7 @@ then
         then
           echo ${globaldir}/${globalgfile}${fhour}
           # Try to wgrib the primary file....
-          $wgrib2 -s ${globaldir}/${globalgfile}${fhour} > globalgfile.ix
+          $WGRIB2 -s ${globaldir}/${globalgfile}${fhour} > globalgfile.ix
           gfile=${globaldir}/${globalgfile}${fhour}
         else
             set +x
@@ -1690,14 +1682,14 @@ then
           case ${parm} in
             "SurfaceU")
               grep "UGRD:10 m " globalgfile.ix | \
-                              $wgrib2 -i $gfile -append -grib \
+                              $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/master.globalgribfile.${PDY}${CYL}.f${fhour} ;;
             "SurfaceV")
               grep "VGRD:10 m " globalgfile.ix | \
-                              $wgrib2 -i $gfile -append -grib \
+                              $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/master.globalgribfile.${PDY}${CYL}.f${fhour} ;;
                      *)
-              grep "${parm}" globalgfile.ix | $wgrib2 -i $gfile -append -grib \
+              grep "${parm}" globalgfile.ix | $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/master.globalgribfile.${PDY}${CYL}.f${fhour} ;;
           esac
         done
@@ -1715,9 +1707,9 @@ then
     done
   
     if [ ${gribver} -eq 1 ]; then
-      $gix ${PERTDATA}/globalgribfile.${PDY}${CYL} ${PERTDATA}/globalixfile.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/globalgribfile.${PDY}${CYL} ${PERTDATA}/globalixfile.${PDY}${CYL}
     else
-      $g2ix ${PERTDATA}/globalgribfile.${PDY}${CYL} ${PERTDATA}/globalixfile.${PDY}${CYL}
+      $GRB2INDEX ${PERTDATA}/globalgribfile.${PDY}${CYL} ${PERTDATA}/globalixfile.${PDY}${CYL}
     fi
       gribfile=${PERTDATA}/globalgribfile.${PDY}${CYL}
       ixfile=${PERTDATA}/globalixfile.${PDY}${CYL}
@@ -1760,19 +1752,19 @@ then
 
       if [ ${gribver} -eq 1 ]; then
          gfile=${ensdir}/${ensgfile}${fhour}
-         $wgrib -s $gfile >ens.ix
+         $WGRIB -s $gfile >ens.ix
 
          for parm in ${wgrib_parmlist}
          do
             case ${parm} in
             "SurfaceU")
-            grep "UGRD:10 m " ens.ix | $wgrib -s $gfile -i -grib -append \
+            grep "UGRD:10 m " ens.ix | $WGRIB -s $gfile -i -grib -append \
                                 -o ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ;;
             "SurfaceV")
-            grep "VGRD:10 m " ens.ix | $wgrib -s $gfile -i -grib -append \
+            grep "VGRD:10 m " ens.ix | $WGRIB -s $gfile -i -grib -append \
                                 -o ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ;;
                  *)
-            grep "${parm}" ens.ix | $wgrib -s $gfile -i -grib -append \
+            grep "${parm}" ens.ix | $WGRIB -s $gfile -i -grib -append \
                                 -o ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ;;
             esac
 
@@ -1781,21 +1773,21 @@ then
     else
 
          gfile=${ensdir}/${ensgfile}${fhour}
-         $wgrib2 -s $gfile >ens.ix
+         $WGRIB2 -s $gfile >ens.ix
 
         for parm in ${wgrib_parmlist}
         do
           case ${parm} in
             "SurfaceU")
               grep "UGRD:10 m " ens.ix | \
-                              $wgrib2 -i $gfile -append -grib \
+                              $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ;;
             "SurfaceV")
               grep "VGRD:10 m " ens.ix | \
-                              $wgrib2 -i $gfile -append -grib \
+                              $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ;;
                      *)
-              grep "${parm}" ens.ix | $wgrib2 -i $gfile -append -grib \
+              grep "${parm}" ens.ix | $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ;;
           esac
         done
@@ -1804,9 +1796,9 @@ then
       done
 
     if [ ${gribver} -eq 1 ]; then
-      $gix ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ${PERTDATA}/ens${pert}ixfile.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ${PERTDATA}/ens${pert}ixfile.${PDY}${CYL}
      else
-      $g2ix ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ${PERTDATA}/ens${pert}ixfile.${PDY}${CYL}
+      $GRB2INDEX ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ${PERTDATA}/ens${pert}ixfile.${PDY}${CYL}
     fi
       gribfile=${PERTDATA}/ens${pert}gribfile.${PDY}${CYL}
       ixfile=${PERTDATA}/ens${pert}ixfile.${PDY}${CYL}
@@ -1852,26 +1844,26 @@ then
          fi
 
          gfile=${gdasdir}/${gdasgfile}${fhour}
-         $wgrib -s $gfile >gdas.ix
+         $WGRIB -s $gfile >gdas.ix
 
          for parm in ${wgrib_parmlist}
          do
             case ${parm} in
             "SurfaceU")
-            grep "UGRD:10 m " gdas.ix | $wgrib -s $gfile -i -grib -append \
+            grep "UGRD:10 m " gdas.ix | $WGRIB -s $gfile -i -grib -append \
                                   -o ${PERTDATA}/gdasgribfile.${PDY}${CYL} ;;
             "SurfaceV")
-            grep "VGRD:10 m " gdas.ix | $wgrib -s $gfile -i -grib -append \
+            grep "VGRD:10 m " gdas.ix | $WGRIB -s $gfile -i -grib -append \
                                   -o ${PERTDATA}/gdasgribfile.${PDY}${CYL} ;;
                  *)
-            grep "${parm}" gdas.ix | $wgrib -s $gfile -i -grib -append    \
+            grep "${parm}" gdas.ix | $WGRIB -s $gfile -i -grib -append    \
                                   -o ${PERTDATA}/gdasgribfile.${PDY}${CYL} ;;
             esac
          done
 
       done
 
-      $gix ${PERTDATA}/gdasgribfile.${PDY}${CYL} ${PERTDATA}/gdasixfile.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/gdasgribfile.${PDY}${CYL} ${PERTDATA}/gdasixfile.${PDY}${CYL}
       gribfile=${PERTDATA}/gdasgribfile.${PDY}${CYL}
       ixfile=${PERTDATA}/gdasixfile.${PDY}${CYL}
 
@@ -1912,7 +1904,7 @@ then
             err_exit " FAILED ${jobid} - MISSING UKMET FILE IN TRACKER SCRIPT - ABNORMAL EXIT"
 #            continue
          fi
-      $wgrib -s $gfile >ukmet.ix
+      $WGRIB -s $gfile >ukmet.ix
 
          for parm in ${wgrib_parmlist}
          do
@@ -1920,21 +1912,21 @@ then
           case ${parm} in
             "SurfaceU")
               grep "UGRD:sfc" ukmet.ix | \
-                $wgrib -s $gfile -i -grib -append \
+                $WGRIB -s $gfile -i -grib -append \
                              -o ${PERTDATA}/ukmetgribfile.${PDY}${CYL} ;;
             "SurfaceV")
               grep "VGRD:sfc" ukmet.ix | \
-                $wgrib -s $gfile -i -grib -append \
+                $WGRIB -s $gfile -i -grib -append \
                              -o ${PERTDATA}/ukmetgribfile.${PDY}${CYL} ;;
             *)
-            grep "${parm}" ukmet.ix | $wgrib -s $gfile -i -grib -append \
+            grep "${parm}" ukmet.ix | $WGRIB -s $gfile -i -grib -append \
                              -o ${PERTDATA}/ukmetgribfile.${PDY}${CYL} ;;
             esac
          done
 
          if [ ${PHASEFLAG} = 'y' ]; then
            egrep "${wgrib_phase_parmlist}" ukmet.ix | grep mb | \
-                                     $wgrib -s $gfile -i -grib -append \
+                                     $WGRIB -s $gfile -i -grib -append \
                                   -o ${PERTDATA}/ukmetgribfile.${PDY}${CYL}
          fi
     else  ## gribver = 2
@@ -1952,21 +1944,21 @@ then
             set -x
             err_exit " FAILED ${jobid} - MISSING UKMET FILE IN TRACKER SCRIPT - ABNORMAL EXIT"
          fi
-      $wgrib2 -s $gfile >ukmet.ix
+      $WGRIB2 -s $gfile >ukmet.ix
 
          for parm in ${wgrib_parmlist}
          do
           case ${parm} in
             "SurfaceU")
               grep "UGRD:sfc" ukmet.ix | \
-                $wgrib2 -i $gfile -append -grib \
+                $WGRIB2 -i $gfile -append -grib \
                              -o ${PERTDATA}/ukmetgribfile.${PDY}${CYL} ;;
             "SurfaceV")
               grep "VGRD:sfc" ukmet.ix | \
-                $wgrib2 -i $gfile -append -grib \
+                $WGRIB2 -i $gfile -append -grib \
                              -o ${PERTDATA}/ukmetgribfile.${PDY}${CYL} ;;
             *)
-            grep "${parm}" ukmet.ix | $wgrib2 -i $gfile -append -grib \
+            grep "${parm}" ukmet.ix | $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/ukmetgribfile.${PDY}${CYL}
            esac
          done
@@ -1975,9 +1967,9 @@ then
       done
 
     if [ ${gribver} -eq 1 ]; then
-      $gix ${PERTDATA}/ukmetgribfile.${PDY}${CYL} ${PERTDATA}/ukmetixfile.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/ukmetgribfile.${PDY}${CYL} ${PERTDATA}/ukmetixfile.${PDY}${CYL}
      else
-      $g2ix ${PERTDATA}/ukmetgribfile.${PDY}${CYL} ${PERTDATA}/ukmetixfile.${PDY}${CYL}
+      $GRB2INDEX ${PERTDATA}/ukmetgribfile.${PDY}${CYL} ${PERTDATA}/ukmetixfile.${PDY}${CYL}
     fi
       gribfile=${PERTDATA}/ukmetgribfile.${PDY}${CYL}
       ixfile=${PERTDATA}/ukmetixfile.${PDY}${CYL}
@@ -2012,7 +2004,7 @@ if [ ${model} -eq 4 ] ; then
 
       let fhr=ict*6
       echo "fhr= $fhr  fhour= $fhour"
-      fmmddhh=` ${ndate} ${fhour} ${PDY}${CYL} | cut -c5- `
+      fmmddhh=` ${NDATE} ${fhour} ${PDY}${CYL} | cut -c5- `
       ec_hires_orig=DCD${immddhh}00${fmmddhh}001
 #      ec_hires_orig=ecens_DCD${immddhh}00${fmmddhh}001
 
@@ -2034,17 +2026,17 @@ if [ ${model} -eq 4 ] ; then
       fi
 
       ecfile=${ecmwfdir}/${ec_hires_orig}
-      $wgrib -s $ecfile >ec.ix
+      $WGRIB -s $ecfile >ec.ix
 
       for parm in ${wgrib_ec_hires_parmlist}
       do
-        grep "${parm}" ec.ix | $wgrib -s $ecfile -i -grib -append  -o ${PERTDATA}/ecgribfile.${PDY}${CYL}
+        grep "${parm}" ec.ix | $WGRIB -s $ecfile -i -grib -append  -o ${PERTDATA}/ecgribfile.${PDY}${CYL}
 
       done
 
          if [ ${PHASEFLAG} = 'y' ]; then
            egrep "${wgrib_ec_phase_parmlist}" ec.ix | grep mb | \
-                                     $wgrib -s $ecfile -i -grib -append \
+                                     $WGRIB -s $ecfile -i -grib -append \
                                   -o ${PERTDATA}/ecgribfile.${PDY}${CYL}
          fi
 
@@ -2052,7 +2044,7 @@ if [ ${model} -eq 4 ] ; then
 
     done
 
-  $gix ${PERTDATA}/ecgribfile.${PDY}${CYL} ${PERTDATA}/ecixfile.${PDY}${CYL}
+  $GRBINDEX ${PERTDATA}/ecgribfile.${PDY}${CYL} ${PERTDATA}/ecixfile.${PDY}${CYL}
   gribfile=${PERTDATA}/ecgribfile.${PDY}${CYL}
   ixfile=${PERTDATA}/ecixfile.${PDY}${CYL}
 
@@ -2136,7 +2128,7 @@ then
 
       ece_orig=${ecedir}/${ecegfile}
 
-      $wgrib -PDS10 ${ece_orig} | grep "${pert_grep_str}" |  awk -F:TR= '{print $1}' | $wgrib -i ${ece_orig} -grib -append -o ${glo}
+      $WGRIB -PDS10 ${ece_orig} | grep "${pert_grep_str}" |  awk -F:TR= '{print $1}' | $WGRIB -i ${ece_orig} -grib -append -o ${glo}
 
     done
 
@@ -2146,12 +2138,12 @@ then
     # statement is for grid 3, a 1x1 global grid (AVN).
 ### 20151127: The new eens is 1x1 resolution, so no need to cbg --Guang Ping Lou
 
-##    ${gix} ${glo} ${xlo}
+##    ${GRBINDEX} ${glo} ${xlo}
     gfile=${PERTDATA}/ece${pert}gribfile.${PDY}${CYL}
-##    $cgb -g"${grid}" -a ${glo} ${xlo} ${gfile}
+##    $COPYGB -g"${grid}" -a ${glo} ${xlo} ${gfile}
     mv ${glo} ${gfile}
 
-    $gix ${PERTDATA}/ece${pert}gribfile.${PDY}${CYL} ${PERTDATA}/ece${pert}ixfile.${PDY}${CYL}
+    $GRBINDEX ${PERTDATA}/ece${pert}gribfile.${PDY}${CYL} ${PERTDATA}/ece${pert}ixfile.${PDY}${CYL}
 
   gribfile=${PERTDATA}/ece${pert}gribfile.${PDY}${CYL}
   ixfile=${PERTDATA}/ece${pert}ixfile.${PDY}${CYL}
@@ -2181,7 +2173,7 @@ fi
       total_file_cnt=$(($total_file_cnt+1))
     if [ ${gribver} -eq 1 ]; then
       gfile=${nvgmdir}/${nvgmgfile}${fhour}
-      $wgrib -s $gfile >nvgm.ix
+      $WGRIB -s $gfile >nvgm.ix
       if [ ! -s ${gfile} ]; then
          set +x
          echo " "
@@ -2202,20 +2194,20 @@ fi
             case ${parm} in
             "SurfaceU")
             grep "UGRD:10 m " nvgm.ix |  \
-            $wgrib -s $gfile -i -grib -append -o ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ;;
+            $WGRIB -s $gfile -i -grib -append -o ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ;;
             "SurfaceV")
             grep "VGRD:10 m " nvgm.ix | \
-            $wgrib -s $gfile -i -grib -append -o ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ;;
+            $WGRIB -s $gfile -i -grib -append -o ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ;;
                  *)
             grep "${parm}" nvgm.ix |  \
-            $wgrib -s $gfile -i -grib -append -o ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ;;
+            $WGRIB -s $gfile -i -grib -append -o ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ;;
             esac
          done
 
     else  ## gribver = 2
 
       gfile=${nvgmdir}/${nvgmgfile}${fhour}-${PDY}${CYL}-NOAA-halfdeg.gr2
-      $wgrib2 -s $gfile >nvgm.ix
+      $WGRIB2 -s $gfile >nvgm.ix
       if [ ! -s ${gfile} ]; then
          set +x
          echo " "
@@ -2236,14 +2228,14 @@ fi
           case ${parm} in
             "SurfaceU")
               grep "UGRD:10 m " nvgm.ix | \
-                              $wgrib2 -i $gfile -append -grib \
+                              $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ;;
             "SurfaceV")
               grep "VGRD:10 m " nvgm.ix | \
-                              $wgrib2 -i $gfile -append -grib \
+                              $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ;;
                      *)
-              grep "${parm}" nvgm.ix | $wgrib2 -i $gfile -append -grib \
+              grep "${parm}" nvgm.ix | $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ;;
           esac
         done
@@ -2253,13 +2245,13 @@ fi
       done
 
     if [ ${gribver} -eq 1 ]; then
-      $gix ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ${PERTDATA}/nvgmixfile.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ${PERTDATA}/nvgmixfile.${PDY}${CYL}
       ixfile=${PERTDATA}/nvgmixfile.${PDY}${CYL}
       gribfile=${PERTDATA}/nvgmgribfile.${PDY}${CYL}
      else
       grid2="0 6 0 0 0 0 0 0 360 181 0 0 90000000 000000000 48 -90000000 359000000 1000000 1000000 0"
-      $g2ix ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ${PERTDATA}/nvgmixfile.${PDY}${CYL}
-      $cgb2 -g "$grid2" ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ${PERTDATA}/nvgmixfile.${PDY}${CYL} \
+      $GRB2INDEX ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ${PERTDATA}/nvgmixfile.${PDY}${CYL}
+      $COPYGB2 -g "$grid2" ${PERTDATA}/nvgmgribfile.${PDY}${CYL} ${PERTDATA}/nvgmixfile.${PDY}${CYL} \
                                      ${PERTDATA}/nvgmgribfileLL.${PDY}${CYL}
       ixfile=${PERTDATA}/nvgmixfile.${PDY}${CYL}
       gribfile=${PERTDATA}/nvgmgribfileLL.${PDY}${CYL}
@@ -2304,40 +2296,40 @@ then
 #        continue
       fi
 
-      $wgrib -s $fensfile >fens.ix
+      $WGRIB -s $fensfile >fens.ix
 
       for parm in ${wgrib_parmlist}
       do
         case ${parm} in
           "SurfaceU")
-            grep "UGRD:10 m " fens.ix | grep -v pv | $wgrib -s $fensfile -i -grib -append -o \
+            grep "UGRD:10 m " fens.ix | grep -v pv | $WGRIB -s $fensfile -i -grib -append -o \
                                     ${PERTDATA}/fensgribfile.${pert}.${PDY}${CYL} ;;
           "SurfaceV")
-            grep "VGRD:10 m " fens.ix | grep -v pv | $wgrib -s $fensfile -i -grib -append -o \
+            grep "VGRD:10 m " fens.ix | grep -v pv | $WGRIB -s $fensfile -i -grib -append -o \
                                     ${PERTDATA}/fensgribfile.${pert}.${PDY}${CYL} ;;
                    *)
-            grep "${parm}" fens.ix | grep -v pv | $wgrib -s $fensfile -i -grib -append -o \
+            grep "${parm}" fens.ix | grep -v pv | $WGRIB -s $fensfile -i -grib -append -o \
                                     ${PERTDATA}/fensgribfile.${pert}.${PDY}${CYL} ;;
         esac
       done
     else
 
          fensfile=${fensdir}/ENSEMBLE.MET.fcst_et0${pert_num}.${fhr}.${PDY}${CYL}
-         $wgrib2 -s $fensfile >fens.ix
+         $WGRIB2 -s $fensfile >fens.ix
 
         for parm in ${wgrib_parmlist}
         do
           case ${parm} in
             "SurfaceU")
               grep "UGRD:10 m " fens.ix | \
-                              $wgrib2 -i $fensfile -append -grib \
+                              $WGRIB2 -i $fensfile -append -grib \
                               ${PERTDATA}/fens${pert}gribfile.${PDY}${CYL} ;;
             "SurfaceV")
               grep "VGRD:10 m " fens.ix | \
-                              $wgrib2 -i $fensfile -append -grib \
+                              $WGRIB2 -i $fensfile -append -grib \
                               ${PERTDATA}/fens${pert}gribfile.${PDY}${CYL} ;;
                      *)
-              grep "${parm}" fens.ix | $wgrib2 -i $fensfile -append -grib \
+              grep "${parm}" fens.ix | $WGRIB2 -i $fensfile -append -grib \
                               ${PERTDATA}/fens${pert}gribfile.${PDY}${CYL} ;;
           esac
         done
@@ -2348,11 +2340,11 @@ then
     if [ ${gribver} -eq 1 ]; then
       gribfile=${PERTDATA}/fensgribfile.${pert}.${PDY}${CYL}
       ixfile=${PERTDATA}/fensixfile.${pert}.${PDY}${CYL}
-      $gix $gribfile $ixfile
+      $GRBINDEX $gribfile $ixfile
      else
       gribfile=${PERTDATA}/fens${pert}gribfile.${PDY}${CYL}
       ixfile=${PERTDATA}/fens${pert}ixfile.${PDY}${CYL}
-      $g2ix $gribfile $ixfile
+      $GRB2INDEX $gribfile $ixfile
     fi
 
  fi
@@ -2393,19 +2385,19 @@ then
          fi
       
          gfile=${ensrdir}/${ensrgfile}${fhour}
-         $wgrib -s $gfile >ensr.ix
+         $WGRIB -s $gfile >ensr.ix
 
          for parm in ${wgrib_parmlist}
          do
             case ${parm} in
             "SurfaceU")
-            grep "UGRD:10 m " ensr.ix | $wgrib -s $gfile -i -grib -append \
+            grep "UGRD:10 m " ensr.ix | $WGRIB -s $gfile -i -grib -append \
                                -o ${PERTDATA}/ensr${pert}gribfile.${PDY}${CYL} ;;
             "SurfaceV")
-            grep "VGRD:10 m " ensr.ix | $wgrib -s $gfile -i -grib -append \
+            grep "VGRD:10 m " ensr.ix | $WGRIB -s $gfile -i -grib -append \
                                -o ${PERTDATA}/ensr${pert}gribfile.${PDY}${CYL} ;;
                  *)
-            grep "${parm}" ensr.ix | $wgrib -s $gfile -i -grib -append \
+            grep "${parm}" ensr.ix | $WGRIB -s $gfile -i -grib -append \
                                -o ${PERTDATA}/ensr${pert}gribfile.${PDY}${CYL} ;;
             esac
 
@@ -2413,7 +2405,7 @@ then
 
       done
 
-      $gix ${PERTDATA}/ensr${pert}gribfile.${PDY}${CYL} ${PERTDATA}/ensr${pert}ixfile.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/ensr${pert}gribfile.${PDY}${CYL} ${PERTDATA}/ensr${pert}ixfile.${PDY}${CYL}
       gribfile=${PERTDATA}/ensr${pert}gribfile.${PDY}${CYL}
       ixfile=${PERTDATA}/ensr${pert}ixfile.${PDY}${CYL}
 
@@ -2454,19 +2446,19 @@ then
          fi
       
          gfile=${aeardir}/${aeargfile}${fhour}
-         $wgrib -s $gfile >aear.ix
+         $WGRIB -s $gfile >aear.ix
 
          for parm in ${wgrib_parmlist}
          do
             case ${parm} in
             "SurfaceU")
-            grep "UGRD:10 m " aear.ix | $wgrib -s $gfile -i -grib -append \
+            grep "UGRD:10 m " aear.ix | $WGRIB -s $gfile -i -grib -append \
                                   -o ${PERTDATA}/aeargribfile.${PDY}${CYL} ;;
             "SurfaceV")
-            grep "VGRD:10 m " aear.ix | $wgrib -s $gfile -i -grib -append \
+            grep "VGRD:10 m " aear.ix | $WGRIB -s $gfile -i -grib -append \
                                   -o ${PERTDATA}/aeargribfile.${PDY}${CYL} ;;
                  *)
-            grep "${parm}" aear.ix | $wgrib -s $gfile -i -grib -append \
+            grep "${parm}" aear.ix | $WGRIB -s $gfile -i -grib -append \
                                   -o ${PERTDATA}/aeargribfile.${PDY}${CYL} ;;
             esac
 
@@ -2474,7 +2466,7 @@ then
 
       done
 
-      $gix ${PERTDATA}/aeargribfile.${PDY}${CYL} ${PERTDATA}/aearixfile.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/aeargribfile.${PDY}${CYL} ${PERTDATA}/aearixfile.${PDY}${CYL}
       gribfile=${PERTDATA}/aeargribfile.${PDY}${CYL}
       ixfile=${PERTDATA}/aearixfile.${PDY}${CYL}
 
@@ -2538,7 +2530,7 @@ then
        fi
 
        if [ -s ${PERTDATA}/tmpsrefixfile ]; then rm ${PERTDATA}/tmpsrefixfile; fi
-          $gix ${srefdir}/${srefgfile}${fhour} ${PERTDATA}/tmpsrefixfile
+          $GRBINDEX ${srefdir}/${srefgfile}${fhour} ${PERTDATA}/tmpsrefixfile
           x1=${PERTDATA}/tmpsrefixfile
 
           set +x
@@ -2550,22 +2542,22 @@ then
 
           g1=${srefdir}/${srefgfile}${fhour}
 
-          $cgb -g"$grid" -k'4*-1 33 100 850' $g1 $x1 ${PERTDATA}/srefllu850.${pert}.grb.f${fhour};   rcc1=$?
-          $cgb -g"$grid" -k'4*-1 33 100 700' $g1 $x1 ${PERTDATA}/srefllu700.${pert}.grb.f${fhour};   rcc2=$?
-          $cgb -g"$grid" -k'4*-1 33 100 500' $g1 $x1 ${PERTDATA}/srefllu500.${pert}.grb.f${fhour};   rcc3=$?
-          $cgb -g"$grid" -k'4*-1 33 105 10'  $g1 $x1 ${PERTDATA}/srefllu10m.${pert}.grb.f${fhour};   rcc4=$?
-          $cgb -g"$grid" -k'4*-1 41 100 850' $g1 $x1 ${PERTDATA}/srefllav850.${pert}.grb.f${fhour};  rcc5=$?
-          $cgb -g"$grid" -k'4*-1 41 100 700' $g1 $x1 ${PERTDATA}/srefllav700.${pert}.grb.f${fhour};  rcc6=$?
-          $cgb -g"$grid" -k'4*-1  7 100 850' $g1 $x1 ${PERTDATA}/srefllz850.${pert}.grb.f${fhour};   rcc7=$?
-          $cgb -g"$grid" -k'4*-1  7 100 700' $g1 $x1 ${PERTDATA}/srefllz700.${pert}.grb.f${fhour};   rcc8=$?
-          $cgb -g"$grid" -k'4*-1  2 102   0' $g1 $x1 ${PERTDATA}/srefllmslp.${pert}.grb.f${fhour};   rcc9=$?
+          $COPYGB -g"$grid" -k'4*-1 33 100 850' $g1 $x1 ${PERTDATA}/srefllu850.${pert}.grb.f${fhour};   rcc1=$?
+          $COPYGB -g"$grid" -k'4*-1 33 100 700' $g1 $x1 ${PERTDATA}/srefllu700.${pert}.grb.f${fhour};   rcc2=$?
+          $COPYGB -g"$grid" -k'4*-1 33 100 500' $g1 $x1 ${PERTDATA}/srefllu500.${pert}.grb.f${fhour};   rcc3=$?
+          $COPYGB -g"$grid" -k'4*-1 33 105 10'  $g1 $x1 ${PERTDATA}/srefllu10m.${pert}.grb.f${fhour};   rcc4=$?
+          $COPYGB -g"$grid" -k'4*-1 41 100 850' $g1 $x1 ${PERTDATA}/srefllav850.${pert}.grb.f${fhour};  rcc5=$?
+          $COPYGB -g"$grid" -k'4*-1 41 100 700' $g1 $x1 ${PERTDATA}/srefllav700.${pert}.grb.f${fhour};  rcc6=$?
+          $COPYGB -g"$grid" -k'4*-1  7 100 850' $g1 $x1 ${PERTDATA}/srefllz850.${pert}.grb.f${fhour};   rcc7=$?
+          $COPYGB -g"$grid" -k'4*-1  7 100 700' $g1 $x1 ${PERTDATA}/srefllz700.${pert}.grb.f${fhour};   rcc8=$?
+          $COPYGB -g"$grid" -k'4*-1  2 102   0' $g1 $x1 ${PERTDATA}/srefllmslp.${pert}.grb.f${fhour};   rcc9=$?
 
           if [ $rcc1 -eq 134 -o $rcc2 -eq 134 -o $rcc3 -eq 134 -o $rcc4 -eq 134 -o $rcc5 -eq 134 -o \
               $rcc6 -eq 134 -o $rcc7 -eq 134 -o $rcc8 -eq 134 -o $rcc9 -eq 134 ]
           then
              set +x
              echo " "
-             echo "!!! ERROR using $cgb to interpolate sref data.  We will stop"
+             echo "!!! ERROR using $COPYGB to interpolate sref data.  We will stop"
              echo "!!! execution because some variables may have been copied"
              echo "!!! okay, while some obviously have not, and that could lead"
              echo "!!! to unreliable results from the tracker.  Check to make"
@@ -2589,7 +2581,7 @@ then
        if [ -s $gfile ]; then
           echo $gfile
           # Try to wgrib the primary file....
-          $wgrib2 -s $gfile > ifile.ix
+          $WGRIB2 -s $gfile > ifile.ix
         else
 
           set +x
@@ -2611,14 +2603,14 @@ then
           case ${parm} in
             "SurfaceU")
               grep "UGRD:10 m " ifile.ix | \
-                              $wgrib2 -i $gfile -append -grib \
+                              $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/sref${pert}gribfile.${PDY}${CYL}.f${fhour} ;;
             "SurfaceV")
               grep "VGRD:10 m " ifile.ix | \
-                              $wgrib2 -i $gfile -append -grib \
+                              $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/sref${pert}gribfile.${PDY}${CYL}.f${fhour} ;;
                      *)
-              grep "${parm}" ifile.ix | $wgrib2 -i $gfile -append -grib \
+              grep "${parm}" ifile.ix | $WGRIB2 -i $gfile -append -grib \
                               ${PERTDATA}/sref${pert}gribfile.${PDY}${CYL}.f${fhour} ;;
           esac
         done
@@ -2638,15 +2630,15 @@ then
        done
 
     if [ ${gribver} -eq 1 ]; then
-       $gix ${PERTDATA}/sref${pert}gribfile.${PDY}${CYL} ${PERTDATA}/sref${pert}ixfile.${PDY}${CYL}
+       $GRBINDEX ${PERTDATA}/sref${pert}gribfile.${PDY}${CYL} ${PERTDATA}/sref${pert}ixfile.${PDY}${CYL}
        gribfile=${PERTDATA}/sref${pert}gribfile.${PDY}${CYL}
        ixfile=${PERTDATA}/sref${pert}ixfile.${PDY}${CYL}
     else
-      ${wgrib2} ${pert}gribfile.pgrb.${PDY}${CYL} \
+      ${WGRIB2} ${pert}gribfile.pgrb.${PDY}${CYL} \
               -new_grid_vectors none       \
               -new_grid latlon "140:421:0.5"  "0:180:0.5"  \
               sref${pert}gribfile.${PDY}${CYL}
-       $g2ix sref${pert}gribfile.${PDY}${CYL} ${PERTDATA}/sref${pert}ixfile.${PDY}${CYL}
+       $GRB2INDEX sref${pert}gribfile.${PDY}${CYL} ${PERTDATA}/sref${pert}ixfile.${PDY}${CYL}
        gribfile=${PERTDATA}/sref${pert}gribfile.${PDY}${CYL}
        ixfile=${PERTDATA}/sref${pert}ixfile.${PDY}${CYL}
     fi
@@ -2691,7 +2683,7 @@ then
       fi
 
       gfile=${cmcdir}/${cmcgfile}${fhour}
-      $wgrib -s $gfile >cmc.ix
+      $WGRIB -s $gfile >cmc.ix
 
          if [ $fhour = '000' ]; then
             vtstring=":anl:"
@@ -2712,17 +2704,17 @@ then
          do
         case ${parm} in
           "SurfaceU")
-            grep "UGRD:10 m " cmc.ix | grep ${vtstring} |  $wgrib -s $gfile -i -grib -append -o ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
+            grep "UGRD:10 m " cmc.ix | grep ${vtstring} |  $WGRIB -s $gfile -i -grib -append -o ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
           "SurfaceV")
-            grep "VGRD:10 m " cmc.ix | grep ${vtstring} |  $wgrib -s $gfile -i -grib -append -o ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
+            grep "VGRD:10 m " cmc.ix | grep ${vtstring} |  $WGRIB -s $gfile -i -grib -append -o ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
                    *)
-            grep "${parm}" cmc.ix | grep ${vtstring} |  $wgrib -s $gfile -i -grib -append -o ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
+            grep "${parm}" cmc.ix | grep ${vtstring} |  $WGRIB -s $gfile -i -grib -append -o ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
           esac
          done
 
          if [ ${PHASEFLAG} = 'y' ]; then
            egrep "${wgrib_phase_parmlist}" cmc.ix | grep mb | \
-                                     $wgrib -s $gfile -i -grib -append \
+                                     $WGRIB -s $gfile -i -grib -append \
                                   -o ${PERTDATA}/cmcgribfile.${PDY}${CYL}
          fi
 
@@ -2730,7 +2722,7 @@ then
       if [ -s ${cmcdir}/${cmcgfile}${fhour}_NCEP.grib2 ]; then
           echo ${cmcdir}/${cmcgfile}${fhour}_NCEP.grib2
           # Try to wgrib the primary file....
-          $wgrib2 -s ${cmcdir}/${cmcgfile}${fhour}_NCEP.grib2 > cmc.ix
+          $WGRIB2 -s ${cmcdir}/${cmcgfile}${fhour}_NCEP.grib2 > cmc.ix
           gfile=${cmcdir}/${cmcgfile}${fhour}_NCEP.grib2 
         else
             set +x
@@ -2768,17 +2760,20 @@ then
          do
         case ${parm} in
           "SurfaceU")
-            grep "UGRD:10 m " cmc.ix  |  $wgrib2 -i $gfile -append -grib ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
+            grep "UGRD:10 m " cmc.ix  |  $WGRIB2 -i $gfile -append -grib ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
           "SurfaceV")
-            grep "VGRD:10 m " cmc.ix  |  $wgrib2 -i $gfile -append -grib ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
+            grep "VGRD:10 m " cmc.ix  |  $WGRIB2 -i $gfile -append -grib ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
+          "PRMSL:mean")
+            grep "PRMSL:mean " cmc.ix | $WGRIB2 -i $gfile -set_byte 4 24 0:0:0:0:0 \
+                              -append -grib ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
                    *)
-            grep "${parm}" cmc.ix |   $wgrib2 -i $gfile -append -grib ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
+            grep "${parm}" cmc.ix |   $WGRIB2 -i $gfile -append -grib ${PERTDATA}/cmcgribfile.${PDY}${CYL} ;;
           esac
          done
 
          if [ ${PHASEFLAG} = 'y' ]; then
            egrep "${wgrib_phase_parmlist}" cmc.ix | grep mb | \
-                                     $wgrib2 -i $gfile -append -grib \
+                                     $WGRIB2 -i $gfile -append -grib \
                                   ${PERTDATA}/cmcgribfile.${PDY}${CYL}
          fi
        fi  #gribver ends here
@@ -2786,18 +2781,18 @@ then
       done
 
     if [ ${gribver} -eq 1 ]; then
-      $gix ${PERTDATA}/cmcgribfile.${PDY}${CYL} ${PERTDATA}/cmcixfile.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/cmcgribfile.${PDY}${CYL} ${PERTDATA}/cmcixfile.${PDY}${CYL}
       gribfile=${PERTDATA}/cmcgribfile.${PDY}${CYL}
       ixfile=${PERTDATA}/cmcixfile.${PDY}${CYL}
 
     else
-      ${wgrib2} cmcgribfile.${PDY}${CYL}  \
+      ${WGRIB2} cmcgribfile.${PDY}${CYL}  \
                -new_grid_vectors none       \
                -new_grid_winds earth        \
                -new_grid latlon "0:360:1.0"  "-90:181:1.0"  \
                 cmcgribfileLL.${PDY}${CYL}
 
-      $g2ix ${PERTDATA}/cmcgribfileLL.${PDY}${CYL}  ${PERTDATA}/cmcixfileLL.${PDY}${CYL}
+      $GRB2INDEX ${PERTDATA}/cmcgribfileLL.${PDY}${CYL}  ${PERTDATA}/cmcixfileLL.${PDY}${CYL}
       ixfile=${PERTDATA}/cmcixfileLL.${PDY}${CYL}
       gribfile=${PERTDATA}/cmcgribfileLL.${PDY}${CYL}
     fi
@@ -2848,24 +2843,24 @@ if [ ${model} -eq 16 ] ; then
       fi
 
       gfile=${ccedir}/${ccegfile}${fhour}
-      $wgrib -s $gfile >ens.ix
+      $WGRIB -s $gfile >ens.ix
 
       for parm in ${wgrib_parmlist}
       do
         case ${parm} in
           "SurfaceU")
-            grep "UGRD:10 m " ens.ix | $wgrib -s $gfile -i -grib -append  -o ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
+            grep "UGRD:10 m " ens.ix | $WGRIB -s $gfile -i -grib -append  -o ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
           "SurfaceV")
-            grep "VGRD:10 m " ens.ix | $wgrib -s $gfile -i -grib -append  -o ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
+            grep "VGRD:10 m " ens.ix | $WGRIB -s $gfile -i -grib -append  -o ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
                    *)
-            grep "${parm}" ens.ix | $wgrib -s $gfile -i -grib -append  -o ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
+            grep "${parm}" ens.ix | $WGRIB -s $gfile -i -grib -append  -o ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
         esac
 
       done
 
          if [ ${PHASEFLAG} = 'y' ]; then
            egrep "${wgrib_phase_parmlist}" ens.ix | grep mb | \
-                                     $wgrib -s $gfile -i -grib -append \
+                                     $WGRIB -s $gfile -i -grib -append \
                                   -o ${PERTDATA}/cce${pert}.${PDY}${CYL}
          fi
 
@@ -2873,7 +2868,7 @@ if [ ${model} -eq 16 ] ; then
       if [ -s ${ccedir}/${ccegfile}${fhour} ]; then
          echo ${ccedir}/${ccegfile}${fhour}
           # Try to wgrib the primary file....
-          $wgrib2 -s ${ccedir}/${ccegfile}${fhour} > ens.ix
+          $WGRIB2 -s ${ccedir}/${ccegfile}${fhour} > ens.ix
           gfile=${ccedir}/${ccegfile}${fhour}
       else
         set +x
@@ -2893,18 +2888,18 @@ if [ ${model} -eq 16 ] ; then
          do
         case ${parm} in
           "SurfaceU")
-            grep "UGRD:10 m " ens.ix  |  $wgrib2 -i $gfile -append -grib ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
+            grep "UGRD:10 m " ens.ix  |  $WGRIB2 -i $gfile -append -grib ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
           "SurfaceV")
-            grep "VGRD:10 m " ens.ix  |  $wgrib2 -i $gfile -append -grib ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
+            grep "VGRD:10 m " ens.ix  |  $WGRIB2 -i $gfile -append -grib ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
                    *)
-            grep "${parm}" ens.ix |   $wgrib2 -i $gfile -append -grib ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
+            grep "${parm}" ens.ix |   $WGRIB2 -i $gfile -append -grib ${PERTDATA}/cce${pert}.${PDY}${CYL} ;;
           esac
          done
 
          if [ ${PHASEFLAG} = 'y' ]; then
         for parm in ${wgrib_phase_parmlist}
            do
-            grep "${parm}" ens.ix | $wgrib2 -i $gfile -append -grib ${PERTDATA}/cce${pert}.${PDY}${CYL}
+            grep "${parm}" ens.ix | $WGRIB2 -i $gfile -append -grib ${PERTDATA}/cce${pert}.${PDY}${CYL}
            done
          fi
 
@@ -2913,18 +2908,18 @@ if [ ${model} -eq 16 ] ; then
     done
 
     if [ ${gribver} -eq 1 ]; then
-      $gix ${PERTDATA}/cce${pert}.${PDY}${CYL} ${PERTDATA}/cce${pert}ixfile.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/cce${pert}.${PDY}${CYL} ${PERTDATA}/cce${pert}ixfile.${PDY}${CYL}
       gribfile=${PERTDATA}/cce${pert}.${PDY}${CYL}
       ixfile=${PERTDATA}/cce${pert}ixfile.${PDY}${CYL}
 
     else
-      ${wgrib2} cce${pert}.${PDY}${CYL}  \
+      ${WGRIB2} cce${pert}.${PDY}${CYL}  \
                -new_grid_vectors none       \
                -new_grid_winds earth        \
                -new_grid latlon "0:360:1.0"  "-90:181:1.0"  \
                 cce${pert}LL.${PDY}${CYL}
 
-      $g2ix ${PERTDATA}/cce${pert}LL.${PDY}${CYL}  ${PERTDATA}/cce${pert}ixfileLL.${PDY}${CYL}
+      $GRB2INDEX ${PERTDATA}/cce${pert}LL.${PDY}${CYL}  ${PERTDATA}/cce${pert}ixfileLL.${PDY}${CYL}
       ixfile=${PERTDATA}/cce${pert}ixfileLL.${PDY}${CYL}
       gribfile=${PERTDATA}/cce${pert}LL.${PDY}${CYL}
     fi
@@ -3136,7 +3131,7 @@ write_vit=y
 ##	         fi
 ##	      fi
 
-           tmscrdir=${tmscrdir:-${COMROOTp1}/arch/${envir}} 
+           tmscrdir=${tmscrdir:-${COMROOT}/gentracks/${envir}/arch} 
            tmtrakstat=${tmscrdir}/tracker.prod.status
            echo "${atcfout} trkr completed okay for ${PDY}${CYL}" >>${tmtrakstat}
   
@@ -3188,7 +3183,8 @@ write_vit=y
      if [ ${PARAFLAG} = 'YES' ]; then
         echo " "
      else
-        tmtrakstat=/com/arch/${envir}/tracker.prod.status
+        tmscrdir=${tmscrdir:-${COMROOT}/gentracks/${envir}/arch}
+        tmtrakstat=${tmscrdir}/tracker.prod.status
         echo "ERROR: ${atcfout} tracker FAILED for ${PDY}${CYL}" >>${tmtrakstat}
      fi
 

@@ -103,14 +103,14 @@ fi
 >${trakfile1}
 >analysis.all.temp
   if [[ ${mm} -eq 01 && ${dd} -lt 10 ]]; then
-  next_yyyy=` ${ndate} -264 ${ymdh} | cut -c1-4`
+  next_yyyy=` ${NDATE} -264 ${ymdh} | cut -c1-4`
    export savedir1=${COMGLTRK}/${next_yyyy}
   grep ${next_yyyy}12 ${savedir1}/${savefile} | grep "34, NEQ" >> ${trakfile1}
   fi
   hr1=240
 while [ ${hr1} -ge 0 ]
 do
-  next_date=` ${ndate} -${hr1} ${ymdh}`
+  next_date=` ${NDATE} -${hr1} ${ymdh}`
   grep ${next_date} ${savedir}/${savefile} | grep "34, NEQ" >> ${trakfile1}
   let hr1=${hr1}-$hr
 done
@@ -118,7 +118,7 @@ done
   hr1=168
 while [ ${hr1} -ge 0 ]
 do
-  next_date=` ${ndate} -${hr1} ${ymdh}`
+  next_date=` ${NDATE} -${hr1} ${ymdh}`
   grep ${next_date} ${trakfile1} | grep -i "${bmodel}, 000" \
               >> analysis.all.temp
   let hr1=${hr1}-${hr}

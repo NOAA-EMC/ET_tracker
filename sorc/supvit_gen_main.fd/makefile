@@ -14,8 +14,8 @@ CMD       = supvit_gen
 all:	$(CMD)
 
 $(CMD):	$(OBJS)
-	$(FC) $(FFLAGS)$(LDFLAGS) -g  -o $(@) $(OBJS) $(LIBS)
+	$(FC) $(FFLAGS)$(LDFLAGS) -g  -traceback -o $(@) $(OBJS) $(LIBS)
 clean:
 	-rm -rf *.o *.mod
 install:
-	-mv $(CMD) ../../exec
+	-mv $(CMD) ../../exec/

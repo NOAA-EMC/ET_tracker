@@ -15,8 +15,6 @@ regtype=$3
 
 export PS4=' + mgtrak_plots_glbl.sh line $LINENO: '
 
-ndate=/nwprod/util/exec/ndate
-
   case ${cmodel} in
     gfs) cmodel=gfso;;
    nvgm) cmodel=ngx;;
@@ -59,9 +57,9 @@ cp ${PARMtrkr}/latlon_bounds*  .
 
 datefile=dates.last4.${ymdh}
 
-$ndate -18 $ymdh  >${datefile}.temp
-$ndate -12 $ymdh >>${datefile}.temp
-$ndate -06 $ymdh >>${datefile}.temp
+$NDATE -18 $ymdh  >${datefile}.temp
+$NDATE -12 $ymdh >>${datefile}.temp
+$NDATE -06 $ymdh >>${datefile}.temp
 echo       $ymdh >>${datefile}.temp
 
 mv ${datefile}.temp ${datefile}

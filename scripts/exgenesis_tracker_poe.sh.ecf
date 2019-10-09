@@ -172,11 +172,8 @@ export CYCLE=t${CYL}z
 export cmodel=${cmodel:-$3}
 export loopnum=${reg:-$4}
 export init_flag=$5
-export jobid=${jobid:-testjob}
-##export jobid=${jobid:-prodjob}
-export envir=${envir:-prod}
-export COMIN=${COMIN:-$cmodel}
-export COMOUT=${COMOUT:-${COMIN}/track}
+#JY export COMIN=${COMIN:-$cmodel}
+#JY export COMOUT=${COMOUT:-${COMIN}/track}
 export SENDCOM=${SENDCOM:-YES}
 #SH export PARAFLAG=${PARAFLAG:-YES}
 export PARAFLAG=${PARAFLAG:-NO}
@@ -192,7 +189,6 @@ export symd=`echo ${PDY} | cut -c3-8`
 export syyyy=`echo ${PDY} | cut -c1-4`
 export CENT=${scc}
 
-export DATA=${DATA:-/ptmpp2/Guang.Ping.Lou/tmptrk}
 
 if [ ! -d ${DATA} ];   then mkdir -p ${DATA}; fi
 

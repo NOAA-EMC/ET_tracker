@@ -12,9 +12,8 @@ ymdh=$1
 cmodel=$2
 regtype=$3
 
-ndate=/nwprod/util/exec/ndate
 if [ ${cmodel} = 'sref' ]; then
-   ymdh_synop=` $ndate -3 $ymdh`
+   ymdh_synop=` $NDATE -3 $ymdh`
  else
    ymdh_synop=$ymdh
 fi

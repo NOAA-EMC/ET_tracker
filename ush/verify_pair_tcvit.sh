@@ -87,7 +87,7 @@ while [ ${begdate} -le ${enddate} ]
  do
       grep ${begdate} "${atcfrec}" >>adeck${ist}.temp2
       grep ${begdate} adeck${ist}.temp3 >>adeck${ist}.temp2
-     begdate=` ${ndate} ${hr} ${begdate}`
+     begdate=` ${NDATE} ${hr} ${begdate}`
  done
 cp adeck${ist}.temp2 ${optrack}/${atcfrec}
 #cp adeck${ist}.temp2 ${savedir}/${atcfrec}

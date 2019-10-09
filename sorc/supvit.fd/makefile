@@ -8,7 +8,7 @@ LDFLAGS=       -g -O0
 SRCS=    supvit_modules.f supvit_main.f
 OBJS=    supvit_modules.o supvit_main.o
 
-CMD	= ../../exec/supvit
+CMD	= supvit
 
 all:	$(CMD)
 

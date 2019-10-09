@@ -1,0 +1,62 @@
+
+------------------------------------- Third Party Test Applications - Not for Production Use -------------------------------------
+   GrADS/2.2.0     (L)    idl/8.6.1               python/2.7.13                  rocoto/complete        (L)    ruby/2.5.1 (L)
+   NCARG/6.4.0            imagemagick/6.9.9-25    python/2.7.14                  rocoto/experimental
+   cmake/3.10.0    (L)    perl/DateTime/1.44      python/3.6.3                   rocoto/1.2.4
+   emc-utils/1.0.0        perl/XML-Parser/2.44    rocoto/pre-release-20181212    rocoto/1.3.0rc2
+   git/2.14.3      (L)    pigz/2.3.4              rocoto/pre-release-20181218    rocoto/20180420-master
+
+--------------------------------------------------------- System Modules ---------------------------------------------------------
+   lmod/7.7    settarg/7.7
+
+--------------------------------------------- Third Party Applications and Compilers ---------------------------------------------
+   EnvVars/1.0.2 (L)    cmake/3.10.0    ips/18.0.1.163 (L)    mktgs/1.0    python/2.7.13    rsync/3.1.2
+   HPSS/5.0.2.5  (L)    gnu/4.8.5       lsf/10.1       (L)    pm5/1.0      python/2.7.14    subversion/1.7.16
+
+-------------------------------------------------- NCO Production Core Modules ---------------------------------------------------
+   prod_envir/1.0.2
+
+-------------------------------------------- Third Party Compiled Libraries and Tools --------------------------------------------
+   HDF5-serial/1.8.20    NCL/6.4.0    NetCDF/3.6.3        jasper/1.900.1     libpng/1.2.44    udunits/2.2.25    zlib/1.2.11
+   HDF5-serial/1.10.1    NCO/4.7.0    NetCDF/4.5.0 (L)    jasper/1.900.29    libpng/1.2.59    xmlparse/2.0.0
+
+------------------------------------------ NCO Production Compiled Libraries and Tools -------------------------------------------
+   bacio/2.0.2         (L)    dumpjb/5.0.0.orig    g2c/1.5.0          ip/3.0.1                 sp/2.0.2          (L)
+   bufr/11.2.0         (L)    dumpjb/5.0.0         g2tmpl/1.5.0       landsfcutil/2.1.0        util_shared/1.1.0 (L)
+   bufr_dumplist/2.0.0        dumpjb/5.0.1.orig    gfsio/1.1.0        prod_util/1.1.0   (L)    w3nco/2.0.6       (L)
+   bufr_dumplist/2.0.1        dumpjb/5.0.1         graphics/2.0.0     sfcio/1.0.0       (L)
+   crtm/2.2.5          (L)    ecflow/4.7.1         grib_util/1.0.6    sigio/2.0.1       (L)
+   crtm/2.2.6                 g2/3.1.0             grib_util/1.1.0    sigio/2.1.0
+
+---------------------------------------------------------- MPI versions ----------------------------------------------------------
+   impi/18.0.1 (L)    smpi/10.1.1.0
+
+------------------------------------------ Third Party Compiled MPI Libraries and Tools ------------------------------------------
+   CFP/2.0.1    ESMF/4_0_0rp2    ESMF/7_0_0    ESMF/7_1_0r    HDF5-parallel/1.8.20    HDF5-parallel/1.10.1    PNetCDF/1.8.1
+
+---------------------------------------- NCO Production Compiled MPI Libraries and Tools -----------------------------------------
+   nemsio/2.2.3 (L)    nemsiogfs/2.0.1    w3emc/2.3.0 (L)
+
+  Where:
+   L:  Module is loaded
+
+Use "module spider" to find all possible modules.
+Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
+
+
+setenv MODULEPATH "/usrx/local/dev/emc_rocoto/modulefiles:/usrx/local/dev/modulefiles:/usrx/local/prod/lmod/lmod/modulefiles/Core:/usrx/local/prod/modulefiles/core_third:/usrx/local/prod/modulefiles/defs:/gpfs/dell1/nco/ops/nwprod/modulefiles/core_prod:/usrx/local/prod/modulefiles/compiler_third/ips/18.0.1:/gpfs/dell1/nco/ops/nwprod/modulefiles/compiler_prod/ips/18.0.1:/usrx/local/prod/modulefiles/compiler_mpi/ips/18.0.1:/usrx/local/prod/modulefiles/mpi_third/ips/18.0.1/impi/18.0.1:/gpfs/dell1/nco/ops/nwprod/modulefiles/mpi_prod/ips/18.0.1/impi/18.0.1";
+setenv _ModuleTable001_ "X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPTcyMDAsWyJjX3Nob3J0VGltZSJdPTEuMDcyNzc1MTI1NTAzNSxkZXB0aFQ9e30sZmFtaWx5PXtbImNvbXBpbGVyIl09ImlwcyIsWyJtcGkiXT0iaW1waSIsfSxtVD17RW52VmFycz17WyJmbiJdPSIvdXNyeC9sb2NhbC9wcm9kL21vZHVsZWZpbGVzL2NvcmVfdGhpcmQvRW52VmFycy8xLjAuMiIsWyJmdWxsTmFtZSJdPSJFbnZWYXJzLzEuMC4yIixbImxvYWRPcmRlciJdPTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iRW52VmFycy8xLjAuMiIsfSxHckFEUz17WyJmbiJdPSIvdXNyeC9sb2NhbC9kZXYvbW9kdWxlZmlsZXMvR3JB";
+setenv _ModuleTable002_ "RFMvMi4yLjAiLFsiZnVsbE5hbWUiXT0iR3JBRFMvMi4yLjAiLFsibG9hZE9yZGVyIl09MTkscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iR3JBRFMvMi4yLjAiLH0sSFBTUz17WyJmbiJdPSIvdXNyeC9sb2NhbC9wcm9kL21vZHVsZWZpbGVzL2NvcmVfdGhpcmQvSFBTUy81LjAuMi41IixbImZ1bGxOYW1lIl09IkhQU1MvNS4wLjIuNSIsWyJsb2FkT3JkZXIiXT0yMCxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJIUFNTLzUuMC4yLjUiLH0sTmV0Q0RGPXtbImZuIl09Ii91c3J4L2xvY2FsL3Byb2QvbW9kdWxlZmlsZXMvY29tcGlsZXJfdGhpcmQvaXBzLzE4";
+setenv _ModuleTable003_ "LjAuMS9OZXRDREYvNC41LjAiLFsiZnVsbE5hbWUiXT0iTmV0Q0RGLzQuNS4wIixbImxvYWRPcmRlciJdPTQscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iTmV0Q0RGLzQuNS4wIix9LGJhY2lvPXtbImZuIl09Ii9ncGZzL2RlbGwxL25jby9vcHMvbndwcm9kL21vZHVsZWZpbGVzL2NvbXBpbGVyX3Byb2QvaXBzLzE4LjAuMS9iYWNpby8yLjAuMiIsWyJmdWxsTmFtZSJdPSJiYWNpby8yLjAuMiIsWyJsb2FkT3JkZXIiXT01LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09ImJhY2lvLzIuMC4yIix9LGJ1ZnI9e1siZm4iXT0iL2dwZnMvZGVsbDEvbmNvL29wcy9u";
+setenv _ModuleTable004_ "d3Byb2QvbW9kdWxlZmlsZXMvY29tcGlsZXJfcHJvZC9pcHMvMTguMC4xL2J1ZnIvMTEuMi4wIixbImZ1bGxOYW1lIl09ImJ1ZnIvMTEuMi4wIixbImxvYWRPcmRlciJdPTEzLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09ImJ1ZnIvMTEuMi4wIix9LGNtYWtlPXtbImZuIl09Ii91c3J4L2xvY2FsL2Rldi9tb2R1bGVmaWxlcy9jbWFrZS8zLjEwLjAiLFsiZnVsbE5hbWUiXT0iY21ha2UvMy4xMC4wIixbImxvYWRPcmRlciJdPTE4LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09ImNtYWtlLzMuMTAuMCIsfSxjcnRtPXtbImZuIl09Ii9ncGZzL2RlbGwxL25jby9v";
+setenv _ModuleTable005_ "cHMvbndwcm9kL21vZHVsZWZpbGVzL2NvbXBpbGVyX3Byb2QvaXBzLzE4LjAuMS9jcnRtLzIuMi41IixbImZ1bGxOYW1lIl09ImNydG0vMi4yLjUiLFsibG9hZE9yZGVyIl09MTUscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iY3J0bS8yLjIuNSIsfSxnaXQ9e1siZm4iXT0iL3VzcngvbG9jYWwvZGV2L21vZHVsZWZpbGVzL2dpdC8yLjE0LjMiLFsiZnVsbE5hbWUiXT0iZ2l0LzIuMTQuMyIsWyJsb2FkT3JkZXIiXT0xNyxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJnaXQvMi4xNC4zIix9LGltcGk9e1siZm4iXT0iL3VzcngvbG9jYWwvcHJvZC9tb2R1bGVm";
+setenv _ModuleTable006_ "aWxlcy9jb21waWxlcl9tcGkvaXBzLzE4LjAuMS9pbXBpLzE4LjAuMS5sdWEiLFsiZnVsbE5hbWUiXT0iaW1waS8xOC4wLjEiLFsibG9hZE9yZGVyIl09MTAscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iaW1waS8xOC4wLjEiLH0saXBzPXtbImZuIl09Ii91c3J4L2xvY2FsL3Byb2QvbW9kdWxlZmlsZXMvY29yZV90aGlyZC9pcHMvMTguMC4xLjE2MyIsWyJmdWxsTmFtZSJdPSJpcHMvMTguMC4xLjE2MyIsWyJsb2FkT3JkZXIiXT0yLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09Imlwcy8xOC4wLjEuMTYzIix9LGxzZj17WyJmbiJdPSIvdXNyeC9sb2NhbC9w";
+setenv _ModuleTable007_ "cm9kL21vZHVsZWZpbGVzL2NvcmVfdGhpcmQvbHNmLzEwLjEiLFsiZnVsbE5hbWUiXT0ibHNmLzEwLjEiLFsibG9hZE9yZGVyIl09Nyxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJsc2YvMTAuMSIsfSxuZW1zaW89e1siZm4iXT0iL2dwZnMvZGVsbDEvbmNvL29wcy9ud3Byb2QvbW9kdWxlZmlsZXMvbXBpX3Byb2QvaXBzLzE4LjAuMS9pbXBpLzE4LjAuMS9uZW1zaW8vMi4yLjMiLFsiZnVsbE5hbWUiXT0ibmVtc2lvLzIuMi4zIixbImxvYWRPcmRlciJdPTExLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09Im5lbXNpby8yLjIuMyIsfSxwcm9kX3V0aWw9e1si";
+setenv _ModuleTable008_ "Zm4iXT0iL2dwZnMvZGVsbDEvbmNvL29wcy9ud3Byb2QvbW9kdWxlZmlsZXMvY29tcGlsZXJfcHJvZC9pcHMvMTguMC4xL3Byb2RfdXRpbC8xLjEuMCIsWyJmdWxsTmFtZSJdPSJwcm9kX3V0aWwvMS4xLjAiLFsibG9hZE9yZGVyIl09MTYscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0icHJvZF91dGlsLzEuMS4wIix9LHJvY290bz17WyJmbiJdPSIvdXNyeC9sb2NhbC9kZXYvZW1jX3JvY290by9tb2R1bGVmaWxlcy9yb2NvdG8vY29tcGxldGUiLFsiZnVsbE5hbWUiXT0icm9jb3RvL2NvbXBsZXRlIixbImxvYWRPcmRlciJdPTIyLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVz";
+setenv _ModuleTable009_ "ZXJOYW1lIl09InJvY290by9jb21wbGV0ZSIsfSxydWJ5PXtbImZuIl09Ii91c3J4L2xvY2FsL2Rldi9lbWNfcm9jb3RvL21vZHVsZWZpbGVzL3J1YnkvMi41LjEiLFsiZnVsbE5hbWUiXT0icnVieS8yLjUuMSIsWyJsb2FkT3JkZXIiXT0yMSxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJydWJ5LzIuNS4xIix9LHNmY2lvPXtbImZuIl09Ii9ncGZzL2RlbGwxL25jby9vcHMvbndwcm9kL21vZHVsZWZpbGVzL2NvbXBpbGVyX3Byb2QvaXBzLzE4LjAuMS9zZmNpby8xLjAuMCIsWyJmdWxsTmFtZSJdPSJzZmNpby8xLjAuMCIsWyJsb2FkT3JkZXIiXT02LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0i";
+setenv _ModuleTable010_ "YWN0aXZlIixbInVzZXJOYW1lIl09InNmY2lvLzEuMC4wIix9LHNpZ2lvPXtbImZuIl09Ii9ncGZzL2RlbGwxL25jby9vcHMvbndwcm9kL21vZHVsZWZpbGVzL2NvbXBpbGVyX3Byb2QvaXBzLzE4LjAuMS9zaWdpby8yLjAuMSIsWyJmdWxsTmFtZSJdPSJzaWdpby8yLjAuMSIsWyJsb2FkT3JkZXIiXT0xNCxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJzaWdpby8yLjAuMSIsfSxzcD17WyJmbiJdPSIvZ3Bmcy9kZWxsMS9uY28vb3BzL253cHJvZC9tb2R1bGVmaWxlcy9jb21waWxlcl9wcm9kL2lwcy8xOC4wLjEvc3AvMi4wLjIiLFsiZnVsbE5hbWUiXT0ic3AvMi4wLjIiLFsibG9hZE9yZGVyIl09OCxwcm9wVD17fSxb";
+setenv _ModuleTable011_ "InN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJzcC8yLjAuMiIsfSx1dGlsX3NoYXJlZD17WyJmbiJdPSIvZ3Bmcy9kZWxsMS9uY28vb3BzL253cHJvZC9tb2R1bGVmaWxlcy9jb21waWxlcl9wcm9kL2lwcy8xOC4wLjEvdXRpbF9zaGFyZWQvMS4xLjAiLFsiZnVsbE5hbWUiXT0idXRpbF9zaGFyZWQvMS4xLjAiLFsibG9hZE9yZGVyIl09Myxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJ1dGlsX3NoYXJlZC8xLjEuMCIsfSx3M2VtYz17WyJmbiJdPSIvZ3Bmcy9kZWxsMS9uY28vb3BzL253cHJvZC9tb2R1bGVmaWxlcy9tcGlfcHJvZC9pcHMvMTguMC4xL2ltcGkvMTguMC4xL3cz";
+setenv _ModuleTable012_ "ZW1jLzIuMy4wIixbImZ1bGxOYW1lIl09InczZW1jLzIuMy4wIixbImxvYWRPcmRlciJdPTEyLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InczZW1jLzIuMy4wIix9LHczbmNvPXtbImZuIl09Ii9ncGZzL2RlbGwxL25jby9vcHMvbndwcm9kL21vZHVsZWZpbGVzL2NvbXBpbGVyX3Byb2QvaXBzLzE4LjAuMS93M25jby8yLjAuNiIsWyJmdWxsTmFtZSJdPSJ3M25jby8yLjAuNiIsWyJsb2FkT3JkZXIiXT05LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InczbmNvLzIuMC42Iix9LH0sbXBhdGhBPXsiL3VzcngvbG9jYWwvZGV2L2VtY19yb2NvdG8vbW9kdWxl";
+setenv _ModuleTable013_ "ZmlsZXMiLCIvdXNyeC9sb2NhbC9kZXYvbW9kdWxlZmlsZXMiLCIvdXNyeC9sb2NhbC9wcm9kL2xtb2QvbG1vZC9tb2R1bGVmaWxlcy9Db3JlIiwiL3VzcngvbG9jYWwvcHJvZC9tb2R1bGVmaWxlcy9jb3JlX3RoaXJkIiwiL3VzcngvbG9jYWwvcHJvZC9tb2R1bGVmaWxlcy9kZWZzIiwiL2dwZnMvZGVsbDEvbmNvL29wcy9ud3Byb2QvbW9kdWxlZmlsZXMvY29yZV9wcm9kIiwiL3VzcngvbG9jYWwvcHJvZC9tb2R1bGVmaWxlcy9jb21waWxlcl90aGlyZC9pcHMvMTguMC4xIiwiL2dwZnMvZGVsbDEvbmNvL29wcy9ud3Byb2QvbW9kdWxlZmlsZXMvY29tcGlsZXJfcHJvZC9pcHMvMTguMC4xIiwiL3VzcngvbG9jYWwvcHJvZC9tb2R1bGVmaWxlcy9jb21waWxlcl9tcGkvaXBzLzE4";
+setenv _ModuleTable014_ "LjAuMSIsIi91c3J4L2xvY2FsL3Byb2QvbW9kdWxlZmlsZXMvbXBpX3RoaXJkL2lwcy8xOC4wLjEvaW1waS8xOC4wLjEiLCIvZ3Bmcy9kZWxsMS9uY28vb3BzL253cHJvZC9tb2R1bGVmaWxlcy9tcGlfcHJvZC9pcHMvMTguMC4xL2ltcGkvMTguMC4xIix9LFsic3lzdGVtQmFzZU1QQVRIIl09Ii91c3J4L2xvY2FsL3Byb2QvbG1vZC9sbW9kL21vZHVsZWZpbGVzL0NvcmU6L3VzcngvbG9jYWwvcHJvZC9tb2R1bGVmaWxlcy9jb3JlX3RoaXJkOi91c3J4L2xvY2FsL3Byb2QvbW9kdWxlZmlsZXMvZGVmczovZ3Bmcy9kZWxsMS9uY28vb3BzL253cHJvZC9tb2R1bGVmaWxlcy9jb3JlX3Byb2QiLH0=";
+setenv _ModuleTable_Sz_ "14";

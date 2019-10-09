@@ -120,13 +120,13 @@ https://vlab.ncep.noaa.gov/redmine/projects/emc-verif/repository/revisions/storm
 Is the code proprietary and is there any restricted date: •	The code is not proprietary and the data is not restricted.
  Archive to HPSS: N/A
 
-
-20190830:
+20190827:
 Release Notes:  Genesis Tracker - released to NCO on September 30, 2019
 This version changes model input data locations where necessary to accommodate the decommission of Phase 1. The output tracks are as well relocated to a more concentrated directory (gentracks). Several scripts were modified to accommodate the transition from Phase 1 to Dell due to computing configuration changes and library modularization.
 
 Transition to from Tide/Gyre Phase 1 to Venus/Mars
 Where is the release tag on subversion/git/vlab?
+https://vlab.ncep.noaa.gov/redmine/projects/emc-verif-tracker/repository?utf8=%E2%9C%93&rev=genesis_tracker.v3.4.9
 List of external software used: nceplibs modules
 w3emc/2.3.0, w3nco/2.0.6, bacio/2.0.2, sp/2.02, g2/3.1.0, jasper/1.900.29, libpng/1.2.59, zlib/1.2.11, grib_util/1.0.6	
 List of all code/scripts modified with this release

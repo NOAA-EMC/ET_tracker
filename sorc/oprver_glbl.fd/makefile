@@ -15,7 +15,7 @@ FFLAGS    = $(DEBUGFLAG) -C
 LIBS      =
 LDFLAGS   = $(DEBUGFLAG) -C
 
-CMD       = ../../exec/nhcver_opr_glbl.x
+CMD       = nhcver_opr_glbl.x
 
 $(CMD): $(OBJS)
 	$(FC) $(LIBS) $(LDFLAGS) -o $(CMD) $(OBJS)
