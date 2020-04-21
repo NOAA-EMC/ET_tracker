@@ -9,8 +9,8 @@
 #BSUB -P %PROJ%
 #BSUB -a poe
 #BSUB -x
-#BSUB -n 21
-#BSUB -R span[ptile=21]
+#BSUB -n 31
+#BSUB -R span[ptile=16]
 
 %include <head.h>
 %include <envir-p2.h>

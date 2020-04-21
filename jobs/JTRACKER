@@ -77,61 +77,46 @@ setpdy.sh
 # COMIN for gfs, nam and arch
 export namvitdir=$(compath.py nam/prod)
 export gfsvitdir=$(compath.py gfs/prod)
-export archsyndir=${archsyndir:-$(compath.py arch/prod/syndat)}
+export archsyndir=${archsyndir:-$(compath.py gfs/prod/syndat)}
 # Input and output
 export COMGLTRK=${COMROOT}/gentracks/${envir}/gentracks
 
-DCOMROOTp1=/gpfs/?p1/nco/ops/dcom
-
 # output
-# export tmscrdir=${COMROOT}/arch/${envir}
 export tmscrdir=${COMROOT}/gentracks/${envir}/arch
 
 case $cmodel in
   gefs)  export COMIN=$(compath.py ${NET}/prod/${RUN}.$PDY)/$CYC/pgrb2a
-         #export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY/track
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY
          ;;
-  # fens)  export COMIN=${DCOMROOT}/prod/${PDY}/wgrbbul/fnmocens_gb2
-  fens)  export COMIN=${DCOMROOTp1}/us007003/${PDY}/wgrbbul/fnmocens_gb2
-         #export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY/track
+  fens)  export COMIN=${DCOMROOT}/prod/${PDY}/wgrbbul/fnmocens_gb2
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY
          ;;
   sref)  export COMIN=$(compath.py $NET/prod/${RUN}.$PDY)/$CYC/pgrb
-         #export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY/track
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY
          ;;
   ecmwf) export COMIN=${DCOMROOT}/prod/${PDY}/wgrbbul/${RUN}
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.${PDY}
          ;;
   eens) 
-         # JY export COMIN=${COMROOTp1}/$NET/prod/${RUN}.$PDY
-         # JY export ECEDIRIN=${COMROOThps}/ens_tracker/prod/ecme.${PDY}
          export COMIN=${COMROOThps}/ens_tracker/prod/ecme.${PDY}
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY
          ;;
   cens)  export COMIN=${COMROOThps}/naefs/prod/${RUN}.$PDY/$CYC/pgrb2ap5
-         #export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY/track
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY
          ;;
-   cmc)  export COMIN=/${DCOMROOT}/prod/$PDY/wgrbbul/cmc_gdps_25km
-         #export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.${PDY}/track
+   cmc)  export COMIN=${DCOMROOT}/prod/$PDY/wgrbbul/cmc_gdps_25km
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.${PDY}
          ;;
    gfs)  export COMIN=$(compath.py ${NET}/prod/${RUN}.$PDY)/$CYC
-         #export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY/track
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY
          ;;
    nvgm) export COMIN=${DCOMROOT}/prod/$RUN
-         #export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.${PDY}/track
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.${PDY}
          ;;
   ukmet) export COMIN=${COMROOThps}/ens_tracker/prod/$RUN.${PDY}/${CYC}/pgrba
-         #export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.${PDY}/track
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.${PDY}
          ;;
   nam)   export COMIN=$(compath.py ${NET}/prod/${RUN}.$PDY)
-         #export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY/track
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.$PDY
          ;;
    *)    export COMIN=${COMROOT}/$NET/prod/${RUN}.${PDY}

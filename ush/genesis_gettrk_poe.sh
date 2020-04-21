@@ -315,12 +315,12 @@ wgrib_ec_phase_parmlist=" GH:900|GH:850|GH:800|GH:750|GH:700|GH:650|GH:600|GH:55
          ensgfile=ge${pert}.t${CYL}z.pgrbaf               ;
          ensifile=ge${pert}.t${CYL}z.pgrbaif              ;
         else
-         ensgfile=ge${pert}.t${CYL}z.pgrb2af               ;
-         ensifile=ge${pert}.t${CYL}z.pgrb2aif              ;
+         ensgfile=ge${pert}.t${CYL}z.pgrb2a.0p50.f        ;
+         ensifile=ge${pert}.t${CYL}z.pgrb2aif             ;
        fi
          fcstlen=384                                      ;
-         fcsthrs=' 00 06 12 18 24 30 36 42 48 54 60 66 72 78
-                   84 90 96 102 108 114 120 126 132 138 144
+         fcsthrs=' 000 006 012 018 024 030 036 042 048 054 060 066 072 078
+                   084 090 096 102 108 114 120 126 132 138 144
                    150 156 162 168 174 180 186 192 198 204 210
                    216 222 228 234 240 246 252 258 264 270 276
                    282 288 294 300 306 312 318 324 330 336 342
@@ -1795,17 +1795,23 @@ then
 
       done
 
+      ${WGRIB2} ens${pert}gribfile.${PDY}${CYL}  \
+               -new_grid_vectors none       \
+               -new_grid_winds earth        \
+               -new_grid latlon "0:360:1.0"  "-90:181:1.0"  \
+                ens${pert}gribfileLL.${PDY}${CYL}
+
     if [ ${gribver} -eq 1 ]; then
-      $GRBINDEX ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ${PERTDATA}/ens${pert}ixfile.${PDY}${CYL}
+      $GRBINDEX ${PERTDATA}/ens${pert}gribfileLL.${PDY}${CYL} ${PERTDATA}/ens${pert}ixfileLL.${PDY}${CYL}
      else
-      $GRB2INDEX ${PERTDATA}/ens${pert}gribfile.${PDY}${CYL} ${PERTDATA}/ens${pert}ixfile.${PDY}${CYL}
+      $GRB2INDEX ${PERTDATA}/ens${pert}gribfileLL.${PDY}${CYL} ${PERTDATA}/ens${pert}ixfileLL.${PDY}${CYL}
     fi
-      gribfile=${PERTDATA}/ens${pert}gribfile.${PDY}${CYL}
-      ixfile=${PERTDATA}/ens${pert}ixfile.${PDY}${CYL}
+      gribfile=${PERTDATA}/ens${pert}gribfileLL.${PDY}${CYL}
+      ixfile=${PERTDATA}/ens${pert}ixfileLL.${PDY}${CYL}
 
    else  ## files are already available
-      gribfile=${PERTDATA}/ens${pert}gribfile.${PDY}${CYL}
-      ixfile=${PERTDATA}/ens${pert}ixfile.${PDY}${CYL}
+      gribfile=${PERTDATA}/ens${pert}gribfileLL.${PDY}${CYL}
+      ixfile=${PERTDATA}/ens${pert}ixfileLL.${PDY}${CYL}
    fi   ## files are already available end here
 
    fi
