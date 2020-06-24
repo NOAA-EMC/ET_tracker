@@ -1,3 +1,43 @@
+05/11/2020 release note:
+
+Release Notes:  GEFS V12 Extratropical Cyclone Tracker Changes - released to NCO on May 11, 2020
+
+Due to upgrades of GEFS to V12, from 21 members to 31 members and grib2 model output data resolution changes, the downstream component extratropical cyclone tracker is being modified to accommodate the model upgrades. Four files have been modified. 
+
+Reason: Downstream updates due to GEFS V12 upgrades.
+Where is the release tag on subversion/git/vlab? 
+Use following address:
+ssh://vlab.ncep.noaa.gov:29418/EMC_verif-genesis-tracker
+ Under genesis_tracker.v3.4.12 branch
+List of all code/scripts modified with this release
+/ecf/dev/jtracker_gefs_00.sms.lsf
+/ecf/genesis_tracker/jtracker_gefs.ecf
+/scripts/exgenesis_tracker_poe.sh.ecf
+/ush/genesis_gettrk_poe.sh
+Changes were made to the above scripts:
+Number of tasks increased from 21 to 31.
+Number of members increased from 21 to 31.
+Forecast hours changed from 2 digits to 3 digits.
+Resolution changed from 1.0 to 0.5 degrees.
+Were any other changes made that aren’t directly related to the transition?
+No other changes were made not related to this addition.
+Are there any changes to incoming data needs or outgoing products?
+No. 
+If output filenames are changing, list the new filename.
+N/A.
+Compute resource information, for every job:
+	Tasks have increased from 21 to 31 due to increased members.
+Additional disk space required is 35GB per year; data retention on disk will remain the same.
+Dissemination will remain the same.
+HPSS archive retention will remain the same. (N/A)
+What are your up and downstream dependencies? 
+All upstream model data (remain the same.)
+Replace old /ecf/dev/jtracker_gefs_00.sms.lsf with new jtracker_gefs_00.sms.lsf
+Replace /ecf/genesis_tracker/jtracker_gefs.ecf with new jtracker_gefs.ecf 
+Replace /scripts/exgenesis_tracker_poe.sh.ecf with new exgenesis_tracker_poe.sh.ecf
+Replace /ush/genesis_gettrk_poe.sh with new genesis_gettrk_poe.sh 
+Note that set the correct path to GEFS V12 output data in /jobs/JTRACKER.
+
 
 Guang Ping Lou -- 20150326
 
