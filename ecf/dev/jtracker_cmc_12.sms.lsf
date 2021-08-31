@@ -1,0 +1,20 @@
+#BSUB -o /gpfs/dell2/ptmp/Guang.Ping.Lou/com/p1top3/tracks_cmc_12.o%J
+#BSUB -e /gpfs/dell2/ptmp/Guang.Ping.Lou/com/p1top3/tracks_cmc_12.o%J
+#BSUB -q dev
+#BSUB -n 1
+#BSUB -R "affinity[core]"
+#BSUB -W 0:40
+#BSUB -P FV3GFS-T2O
+#BSUB -R span[ptile=1]
+#BSUB -J cmc_trk_12
+
+# EXPORT list here
+set -x
+export envir=prod
+export cmodel=cmc
+export NET=us007003
+export RUN=cmc
+export cyc=12
+export job=tracker_cmc_12
+
+. /gpfs/dell2/emc/verification/noscrub/Guang.Ping.Lou/genesis_tracker.v3.4.10/jobs/JTRACKER.sms.$envir 20191007

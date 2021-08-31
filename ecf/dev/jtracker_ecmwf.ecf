@@ -1,0 +1,56 @@
+#BSUB -J %E%tracker_ecmwf_%CYC%
+#BSUB -o /com/output/%ENVIR%/today/tracker_ecmwf_%CYC%.o%J
+#BSUB -e /com/output/%ENVIR%/today/tracker_ecmwf_%CYC%.o%J
+#BSUB -L /bin/sh
+#BSUB -cwd /tmpnwprd
+#BSUB -W 00:50
+#BSUB -P %PROJ%
+#BSUB -n 1
+#BSUB -q prod_shared
+#BSUB -R "rusage[mem=1000]" -R "affinity[core]"
+#BSUB -a poe
+
+%include <head.h>
+
+# EXPORT list here
+set -x
+export envir=%ENVIR%
+export cmodel=ecmwf
+export NET=ecmwf
+export RUN=ecmwf
+export cyc=%CYC%
+export job=tracker_ecmwf_%CYC%
+
+VERSION_FILE=/nw${envir}/versions/genesis_tracker.ver
+if [ -f $VERSION_FILE ]; then
+  . $VERSION_FILE
+else
+  ecflow_client --msg="***JOB ${SMSNAME} ERROR: Version File $VERSION_FILE does not exist ***"
+  ecflow_client --abort
+  exit
+fi
+
+/nw${envir}/genesis_tracker.${code_ver}/jobs/JTRACKER
+
+if [ $? -ne 0 ]; then
+  ecflow_client --msg="***JOB ${SMSNAME} ERROR RUNNING J-SCRIPT ***"
+  ecflow_client --abort
+  exit
+fi
+
+%include <tail.h>
+%manual
+######################################################################
+PURPOSE:  To extract the storm tracks from ecmwf model forecasts.
+######################################################################
+
+######################################################################
+# Job specific troubleshooting instructions:
+#  see generic troubleshoot manual page
+#
+######################################################################
+
+# include manual page below
+%end
+~
+

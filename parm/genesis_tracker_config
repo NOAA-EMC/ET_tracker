@@ -1,0 +1,110 @@
+#######################################################
+# This file defines the various input varibles for the
+# SREF model run
+#######################################################
+if [ $RUN_ENVIR = dev ]
+then
+  export HOMEtrkr=/meso/save/$LOGNAME/genesis_tracker
+  export EXECtrkr=$HOMEtrkr/exec
+  export FIXtrkr=$HOMEtrkr/fix
+  export PARMtrkr=$HOMEtrkr/parm
+  export USHtrkr=$HOMEtrkr/ush
+  export SCRIPTStrkr=$HOMEtrkr/scripts
+
+  export HOMEeta=/nwprod
+  export EXECeta=$HOMEeta/exec
+  export FIXeta=$HOMEeta/fix
+  export PARMeta=$HOMEeta/parm
+  export USHeta=$HOMEeta/ush
+
+  export HOMEglobal=/nwprod
+  export EXECglobal=$HOMEglobal/exec
+  export FIXglobal=$HOMEglobal/fix
+  export PARMglobal=$HOMEglobal/parm
+  export USHglobal=$HOMEglobal/ush
+
+  export SENDCOM=YES
+  export SENDOMB=YES
+  export SENDDBN=NO
+  export SENDDBN_GB2=NO
+  export SENDSMS=YES
+
+  export DATA_IN=/ptmp/$LOGNAME/tmpnwprd
+  export jlogfile=$DATA_IN/jlogfile
+
+  export NOSCRUB=/meso/save/$LOGNAME/tmpnwprd
+  export COM=$NOSCRUB/trkr_test/com/tracker/prod
+  export COM_OUT=$NOSCRUB/trkr_test/com/tracker/prod
+  export COM_OMB=$NOSCRUB/trkr_test/com/omb/prod
+  export GES_IN=$NOSCRUB/trkr_test/nwges/prod
+
+elif [ $RUN_ENVIR = prod ]
+then
+  export HOMEtrkr=/nwprod
+  export EXECtrkr=$HOMEtrkr/exec
+  export FIXtrkr=$HOMEtrkr/fix
+  export PARMtrkr=HOMEtrkr/parm
+  export USHtrkr=$HOMEtrkr/ush
+
+  export HOMEeta=/nwprod
+  export EXECeta=$HOMEeta/exec
+  export FIXeta=$HOMEeta/fix
+  export PARMeta=$HOMEeta/parm
+  export USHeta=$HOMEeta/ush
+
+  export HOMEglobal=/nwprod
+  export EXECglobal=$HOMEglobal/exec
+  export FIXglobal=$HOMEglobal/fix
+  export PARMglobal=$HOMEglobal/parm
+  export USHglobal=$HOMEglobal/ush
+
+  export SENDCOM=YES
+  export SENDDBN=YES
+  export SENDSMS=YES
+
+  export DATA_IN=/tmpnwprd
+  export jlogfile=/com/logs/jlogfile
+
+  #export COM_IN=/com/trkr/${envir}
+  export COM_OUT=/com/tracker/${envir}
+  export GES_IN=/nwges/${envir}
+  export HISDATA=/nwges/${envir}
+  export GESNDAS=/nwges/prod
+  export COMNAM=/com/nam/prod
+elif [ $RUN_ENVIR = para ]
+then
+  export HOMEtrkr=/nw${envir}
+  export EXECtrkr=$HOMEtrkr/exec
+  export FIXtrkr=$HOMEtrkr/fix
+  export PARMtrkr=HOMEtrkr/parm
+  export USHtrkr=$HOMEtrkr/ush
+
+  export HOMEeta=/nwprod
+  export EXECeta=$HOMEeta/exec
+  export FIXeta=$HOMEeta/fix
+  export PARMeta=$HOMEeta/parm
+  export USHeta=$HOMEeta/ush
+
+  export HOMEglobal=/nwprod
+  export EXECglobal=$HOMEglobal/exec
+  export FIXglobal=$HOMEglobal/fix
+  export PARMglobal=$HOMEglobal/parm
+  export USHglobal=$HOMEglobal/ush
+
+  export SENDCOM=YES
+  export SENDDBN=NO
+  export SENDSMS=YES
+
+  export DATA_IN=/tmpnwprd
+  export jlogfile=/com/logs/${envir}/jlogfile
+
+  export com=/com/trkr/${envir}
+  export COM=/com/trkr/${envir}
+  export COM_IN=/com/trkr/${envir}
+  export COM_OUT=/com/trkr/${envir}
+  export GES_IN=/nwges/${envir}
+  export HISDATA=/nwges/${envir}
+  export GESNDAS=/nwges/prod
+  export COMNAM=/com/nam/prod
+fi
+  export archsyndir=/com/arch/prod/syndat

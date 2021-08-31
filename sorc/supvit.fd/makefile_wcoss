@@ -1,0 +1,23 @@
+SHELL=          /bin/sh
+#LIBS=           -L/scratch2/portfolios/NCEPDEV/meso/save/Perry.Shafran/lib -lw3_d
+#LIBS=           -L/u/George.Vandenberghe/nwprod/lib -lw3_d
+LIBS=           -L/nwprod/lib -lw3nco_d
+##LIBS=          
+FC=             ifort
+FFLAGS=        -i4 -r8 
+LDFLAGS=       -g -O0 
+
+SRCS=    supvit_modules.f supvit_main.f
+OBJS=    supvit_modules.o supvit_main.o
+
+CMD       = supvit
+
+all:	$(CMD)
+
+$(CMD):	$(OBJS)
+	$(FC) $(FFLAGS) $(LDFLAGS) -o $(@) $(OBJS) $(LIBS)
+clean:
+	-rm -rf *.o *.lst
+install:
+	-mv $(CMD) ../../exec
+

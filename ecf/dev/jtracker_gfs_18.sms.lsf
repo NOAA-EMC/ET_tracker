@@ -1,0 +1,20 @@
+#BSUB -o /gpfs/dell2/ptmp/Guang.Ping.Lou/com/p1top3/tracks_gfs_18.o%J
+#BSUB -e /gpfs/dell2/ptmp/Guang.Ping.Lou/com/p1top3/tracks_gfs_18.o%J
+#BSUB -q dev
+#BSUB -n 1
+#BSUB -R "affinity[core]"
+#BSUB -W 0:40
+#BSUB -P FV3GFS-T2O
+#BSUB -R span[ptile=1]
+#BSUB -J gfs_trk_18
+
+# EXPORT list here
+set -x
+export envir=prod
+export cmodel=gfs
+export NET=gfs
+export RUN=gfs
+export cyc=18
+export job=tracker_gfs_18
+
+. /gpfs/dell2/emc/verification/noscrub/Guang.Ping.Lou/genesis_tracker.v3.4.9/jobs/JTRACKER.sms.$envir 20190825

@@ -1,0 +1,19 @@
+#BSUB -o /gpfs/dell2/ptmp/Guang.Ping.Lou/com/trk_gefs/tracks_gefs_00.o%J
+#BSUB -e /gpfs/dell2/ptmp/Guang.Ping.Lou/com/trk_gefs/tracks_gefs_00.o%J
+#BSUB -q dev
+#BSUB -n 31
+#BSUB -R "affinity[core]"
+#BSUB -W 1:30
+#BSUB -P GFS-DEV
+#BSUB -R "span[ptile=16]"
+#BSUB -J gefs_trk
+# EXPORT list here
+set -x
+export envir=prod
+export cmodel=gefs
+export NET=gens
+export RUN=gefs
+export cyc=00
+export job=tracker_gefs_00
+
+. /gpfs/dell2/emc/verification/noscrub/Guang.Ping.Lou/EMC_verif-genesis-tracker/jobs/JTRACKER.sms.$envir 20200415
