@@ -1,0 +1,33 @@
+#!/bin/sh
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_emx_12.out09
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_emx_12.out09
+#PBS -q dev
+#PBS -l select=1:ncpus=1
+#PBS -l walltime=0:40:0
+#PBS -A GFS-DEV
+#PBS -N emx_trk_12
+
+# EXPORT list here
+set -x
+export envir=canned
+export cmodel=ecmwf
+export NET=us007003
+export RUN=ecmwf
+export cyc=12
+export job=tracker_ecmwf_12
+
+##-----------------------------------------------------------
+export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
+export HOMEgenesis_tracker=$NWROOT/ET_tracker
+export DCOMROOT=/lfs/h1/ops/$envir/dcom
+export COMROOT=/lfs/h1/ops/$envir/com
+export COMROOTL=/lfs/h2/emc/ptmp/Guang.Ping.Lou
+export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
+export PDY=20210824
+module load prod_util/2.0.8
+module load grib_util/1.2.2
+module load libjpeg/9c
+module load wgrib2/2.0.8
+##-----------------------------------------------------------
+
+. /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/jobs/JTRACKER

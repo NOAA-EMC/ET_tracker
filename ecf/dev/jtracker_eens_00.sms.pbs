@@ -1,0 +1,33 @@
+#!/bin/sh
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_eens_00.out08
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_eens_00.out08
+#PBS -q dev
+#PBS -l place=vscatter,select=1:ncpus=100:mpiprocs=50
+#PBS -A GFS-DEV
+#PBS -l walltime=1:40:0
+######PBS -l select=1:ncpus=62:mpiprocs=31:mem=30GB
+
+set -x
+export envir=canned
+export cmodel=eens
+export NET=ens_tracker
+export RUN=ecme
+export cyc=00
+export job=trkr_eens_00
+
+##-----------------------------------------------------------
+export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
+export HOMEgenesis_tracker=$NWROOT/ET_tracker
+export DCOMROOT=/lfs/h1/ops/$envir/dcom
+export COMROOT=/lfs/h1/ops/$envir/com
+export COMROOTL=/lfs/h2/emc/ptmp/Guang.Ping.Lou
+export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
+export eens_ver=v1.3
+export PDY=20210824
+module load prod_util/2.0.8
+module load grib_util/1.2.2
+module load libjpeg/9c
+module load wgrib2/2.0.8
+##-----------------------------------------------------------
+
+. /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/jobs/JTRACKER
