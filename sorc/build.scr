@@ -2,7 +2,7 @@
 set -eux
 
 source ./machine-setup.sh > /dev/null 2>&1
-    source ../modulefiles/gen_trkr.wcoss_dell_p3
+    source ../modulefiles/gen_trkr.$target
 echo $G2_INCd
 echo ${W3EMC_INC4}
 echo ${W3EMC_LIBd}
