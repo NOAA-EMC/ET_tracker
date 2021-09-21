@@ -235,32 +235,31 @@ export gribver=${gribver:-2}
   fi
 if [ ${cmodel} = 'gefs' ]; then
 # Global ensemble
-##  pertstring=' p01 p02 '
-export APRUN="mpirun -n 31"
+APRUN="mpiexec --cpu-bind core --configfile" 
   pertstring=' p01 p02 p03 p04 p05 p06 p07 p08 p09 p10 p11 p12 p13 p14 p15 p16 p17 p18 p19 p20 c00 p21 p22 p23 p24 p25 p26 p27 p28 p29 p30'
 elif [ ${cmodel} = 'sref' ]; then
 # Short range ensemble
    if [ ${gribver} = 1 ]; then
-export APRUN="mpirun -n 21"
+APRUN="mpiexec --cpu-bind core --configfile" 
      pertstring=' sac1 san1 sap1 san2 sap2 san3 sap3 snc1 snn1 snp1 snn2 snp2 snn3 snp3 sbc1 sbn1 sbp1 sbn2 sbp2 sbn3 sbp3'
 # new members replace old above Jan 2015:
    else
-export APRUN="mpirun -n 26"
+APRUN="mpiexec --cpu-bind core --configfile" 
      pertstring=' sac1 san1 san2 san3 san4 san5 san6 sap1 sap2 sap3 sap4 sap5 sap6 sbc1 sbn1 sbn2 sbn3 sbn4 sbn5 sbn6 sbp1 sbp2 sbp3 sbp4 sbp5 sbp6'
    fi
 elif [ ${cmodel} = 'eens' ]; then
-export APRUN="mpirun -n 50"
+APRUN="mpiexec --cpu-bind core --configfile" 
 # ECMWF ensemble
   pertstring=' p01 p02 p03 p04 p05 p06 p07 p08 p09 p10 p11 p12 p13 p14 p15 p16 p17 p18 p19 p20 p21 p22 p23 p24 p25 n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 n12 n13 n14 n15 n16 n17 n18 n19 n20 n21 n22 n23 n24 n25'
 elif [ ${cmodel} = 'cens' ]; then
-export APRUN="mpirun -n 21"
+APRUN="mpiexec --cpu-bind core --configfile" 
 # Canadian ensemble
   pertstring=' c00 p01 p02 p03 p04 p05 p06 p07 p08 p09 p10 p11 p12 p13 p14 p15 p16 p17 p18 p19 p20'
 elif [ ${cmodel} = 'fens' ]; then
-export APRUN="mpirun -n 21"
+APRUN="mpiexec --cpu-bind core --configfile" 
   pertstring=' p00 p01 p02 p03 p04 p05 p06 p07 p08 p09 p10 p11 p12 p13 p14 p15 p16 p17 p18 p19 p20'
 else 
-export APRUN="mpirun -n 1"
+APRUN="mpiexec --cpu-bind core --configfile" 
   pertstring=' xxxx'
 fi
 
@@ -304,18 +303,19 @@ fi
 export TRKDATA=${DATA}/${bmodel}
 if [ ! -d ${TRKDATA} ]; then mkdir -p ${TRKDATA}; fi
 
+cp $USHtrkr/genesis_gettrk_poe.sh .
 rm -rf poe_ens
 
 for pert in ${pertstring}
 do
 
    # Create the poe script for each member
-echo "sh $USHtrkr/genesis_gettrk_poe.sh $pert" >>poe_ens
+echo " ./genesis_gettrk_poe.sh $pert" >>poe_ens
 done
 
 mv poe_ens cmdfile
-
 chmod +x cmdfile
+cat cmdfile
 
 #SH ##### Testing with more MP setting for debugging purpose #####
 #  export MP_LABELIO=YES
@@ -323,8 +323,7 @@ chmod +x cmdfile
 ##SH ##############################################################
 
 # Execute the poe
-##mpirun cmdfile
-$APRUN cfp cmdfile
+$APRUN cmdfile
 
 #export err=$?; err_chk
 
