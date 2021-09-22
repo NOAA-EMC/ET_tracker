@@ -1,15 +1,15 @@
-09/28/2021 release note: (Guang Ping Lou)
+Release Notes: Extratropical Cyclone Tracker Transition to WCOSS2 - released to NCO on September 28, 2021
 
-Release Notes:  Extratropical Cyclone Tracker Transition to WCOSS2 - released to NCO on Setp. 28, 2021
-
-Due to upgrades of the super computers, the extratropical cyclone tracker has been modified to accommodate the new computer systems. Thirty four (34) files and scripts have been modified and one file was added. 
+Due to upgrades of the supercomputers, the extratropical cyclone tracker has been modified to accommodate the new computer systems. Five (5) files and scripts have been modified and twenty nine (29) files were added.
 
 Reason: Transition from WCOSS to WCOSS2.
-Where is the release tag on subversion/git/vlab? 
-Use following address:
+
+Where is the release tag on subversion/git/vlab?
+It is on Github by using the following address:
 https://github.com/NOAA-EMC/ET_tracker
 Under genesis_tracker.v3.4.15 branch
-List of all code/scripts modified with this release
+
+List of all code/scripts modified with this release:
         ecf/dev/jtracker_cens_00.sms.pbs
         ecf/dev/jtracker_cens_12.sms.pbs
         ecf/dev/jtracker_cmc_00.sms.pbs
@@ -38,40 +38,51 @@ List of all code/scripts modified with this release
         ecf/dev/jtracker_sref_21.sms.pbs
         ecf/dev/jtracker_ukmet_00.sms.pbs
         ecf/dev/jtracker_ukmet_12.sms.pbs
-Changes were made to the above scripts:
-Changes were made to the job submission cards from BSUB to PBS and 
-corresponding resource requirements, path modifications, correct module 
+The above job card scripts were added:
+Changes were made to the job submission cards from BSUB to PBS and
+corresponding resource requirements, path modifications, correct module
 loading and others.
 
-        scripts/exgenesis_tracker_poe.sh.ecf
-APRUN format changed to new requirements in script "scripts/exgenesis_tracker_poe.sh.ecf"
-        jobs/JTRACKER
-Origianal paths were replaced by WCOSS2 path.
-        sorc/build.scr
-Modified for sourcing targeted machine for module load. 
-        ush/genesis_gettrk_poe.sh
-        ush/verify_pair_tcvit.sh
+scripts/exgenesis_tracker_poe.sh.ecf:
+APRUN format changed to new requirements and path changes.
+       
+jobs/JTRACKER:
+Original paths were replaced by WCOSS2 path.
+
+sorc/build.scr
+Modified for sourcing the targeted machine for module load.
+
+ush/genesis_gettrk_poe.sh
+ush/verify_pair_tcvit.sh
 Cyclone vitals path modified to the new location.
-        modulefiles/gen_trkr.wcoss2
+        
+modulefiles/gen_trkr.wcoss2
 Added for new modules needed for the WOCSS2.
 
 Were any other changes made that aren’t directly related to the transition?
 No other changes were made not related to this addition.
+
 Are there any changes to incoming data needs or outgoing products?
-No. 
+No.
+
 If output filenames are changing, list the new filename.
 N/A.
+
 Compute resource information, for every job:
-	No changes
+        No changes
+
 Dissemination will remain the same.
 HPSS archive retention will remain the same. (N/A)
-What are your up and downstream dependencies? 
+
+What are your up and downstream dependencies?
 All upstream model data (remain the same.)
 
+Procedure to download the new version:
 git clone https://github.com/NOAA-EMC/ET_tracker.git genesis_tracker.v3.4.15
 cd genesis_tracker.v3.4.15
 git checkout genesis_tracker.v3.4.15
-Define paths in the job cards (make corrections to the corresponding NCO paths:
+
+Define paths in the job cards (make modifications to the corresponding NCO paths):
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
 export HOMEgenesis_tracker=$NWROOT/ET_tracker
 export DCOMROOT=/lfs/h1/ops/$envir/dcom
