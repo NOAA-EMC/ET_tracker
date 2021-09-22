@@ -1,3 +1,89 @@
+09/28/2021 release note: (Guang Ping Lou)
+
+Release Notes:  Extratropical Cyclone Tracker Transition to WCOSS2 - released to NCO on Setp. 28, 2021
+
+Due to upgrades of the super computers, the extratropical cyclone tracker has been modified to accommodate the new computer systems. Thirty four (34) files and scripts have been modified and one file was added. 
+
+Reason: Transition from WCOSS to WCOSS2.
+Where is the release tag on subversion/git/vlab? 
+Use following address:
+https://github.com/NOAA-EMC/ET_tracker
+Under genesis_tracker.v3.4.15 branch
+List of all code/scripts modified with this release
+        ecf/dev/jtracker_cens_00.sms.pbs
+        ecf/dev/jtracker_cens_12.sms.pbs
+        ecf/dev/jtracker_cmc_00.sms.pbs
+        ecf/dev/jtracker_cmc_12.sms.pbs
+        ecf/dev/jtracker_ecmwf_00.sms.pbs
+        ecf/dev/jtracker_ecmwf_12.sms.pbs
+        ecf/dev/jtracker_eens_00.sms.pbs
+        ecf/dev/jtracker_eens_12.sms.pbs
+        ecf/dev/jtracker_fens_00.sms.pbs
+        ecf/dev/jtracker_fens_12.sms.pbs
+        ecf/dev/jtracker_gefs_00.sms.pbs
+        ecf/dev/jtracker_gefs_12.sms.pbs
+        ecf/dev/jtracker_gfs_00.sms.pbs
+        ecf/dev/jtracker_gfs_06.sms.pbs
+        ecf/dev/jtracker_gfs_12.sms.pbs
+        ecf/dev/jtracker_gfs_18.sms.pbs
+        ecf/dev/jtracker_nam_00.sms.pbs
+        ecf/dev/jtracker_nam_06.sms.pbs
+        ecf/dev/jtracker_nam_12.sms.pbs
+        ecf/dev/jtracker_nam_18.sms.pbs
+        ecf/dev/jtracker_nvgm_00.sms.pbs
+        ecf/dev/jtracker_nvgm_12.sms.pbs
+        ecf/dev/jtracker_sref_03.sms.pbs
+        ecf/dev/jtracker_sref_09.sms.pbs
+        ecf/dev/jtracker_sref_15.sms.pbs
+        ecf/dev/jtracker_sref_21.sms.pbs
+        ecf/dev/jtracker_ukmet_00.sms.pbs
+        ecf/dev/jtracker_ukmet_12.sms.pbs
+Changes were made to the above scripts:
+Changes were made to the job submission cards from BSUB to PBS and 
+corresponding resource requirements, path modifications, correct module 
+loading and others.
+
+        scripts/exgenesis_tracker_poe.sh.ecf
+APRUN format changed to new requirements in script "scripts/exgenesis_tracker_poe.sh.ecf"
+        jobs/JTRACKER
+Origianal paths were replaced by WCOSS2 path.
+        sorc/build.scr
+Modified for sourcing targeted machine for module load. 
+        ush/genesis_gettrk_poe.sh
+        ush/verify_pair_tcvit.sh
+Cyclone vitals path modified to the new location.
+        modulefiles/gen_trkr.wcoss2
+Added for new modules needed for the WOCSS2.
+
+Were any other changes made that aren’t directly related to the transition?
+No other changes were made not related to this addition.
+Are there any changes to incoming data needs or outgoing products?
+No. 
+If output filenames are changing, list the new filename.
+N/A.
+Compute resource information, for every job:
+	No changes
+Dissemination will remain the same.
+HPSS archive retention will remain the same. (N/A)
+What are your up and downstream dependencies? 
+All upstream model data (remain the same.)
+
+git clone https://github.com/NOAA-EMC/ET_tracker.git genesis_tracker.v3.4.15
+cd genesis_tracker.v3.4.15
+git checkout genesis_tracker.v3.4.15
+Define paths in the job cards (make corrections to the corresponding NCO paths:
+export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
+export HOMEgenesis_tracker=$NWROOT/ET_tracker
+export DCOMROOT=/lfs/h1/ops/$envir/dcom
+export COMROOT=/lfs/h1/ops/$envir/com
+export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
+
+In the directory ecf/genesis_tracker, modify ecflow job cards based on job cards above:
+jtracker_cens.ecf   jtracker_eens.ecf  jtracker_gfs.ecf   jtracker_sref.ecf
+jtracker_cmc.ecf    jtracker_fens.ecf  jtracker_nam.ecf   jtracker_ukmet.ecf
+jtracker_ecmwf.ecf  jtracker_gefs.ecf  jtracker_nvgm.ecf
+
+-----------------------------------------------------
 05/11/2020 release note:
 
 Release Notes:  GEFS V12 Extratropical Cyclone Tracker Changes - released to NCO on May 11, 2020
