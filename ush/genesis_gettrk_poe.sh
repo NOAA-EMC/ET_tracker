@@ -681,11 +681,11 @@ wgrib_ec_phase_parmlist=" GH:900|GH:850|GH:800|GH:750|GH:700|GH:650|GH:600|GH:55
 
    if [ ${modtyp} = 'global' ]; then
 
-      synvitdir=${gfsvitdir}/gfs.$PDY/${CYL}
+      synvitdir=${gfsvitdir}/gfs.$PDY/${CYL}/atmos
       synvitfile=gfs.t${CYL}z.syndata.tcvitals.tm00
-      synvit6ago_dir=${gfsvitdir}/gfs.${d6ago_4ymd}/${d6ago_hh}
+      synvit6ago_dir=${gfsvitdir}/gfs.${d6ago_4ymd}/${d6ago_hh}/atmos
       synvit6ago_file=gfs.t${d6ago_hh}z.syndata.tcvitals.tm00
-      synvit6ahead_dir=${gfsvitdir}/gfs.${d6ahead_4ymd}/${d6ahead_hh}
+      synvit6ahead_dir=${gfsvitdir}/gfs.${d6ahead_4ymd}/${d6ahead_hh}/atmos
       synvit6ahead_file=gfs.t${d6ahead_hh}z.syndata.tcvitals.tm00
 
    else
