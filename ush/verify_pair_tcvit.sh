@@ -9,7 +9,7 @@ date
 ymdh=$1
 regtype=$2
 
-export archsyndir=${archsyndir:-/com/arch/prod/syndat}
+export archsyndir=${archsyndir:-prod/gfs/v16.2/syndat}
 ndate=ndate
 set -x
 
