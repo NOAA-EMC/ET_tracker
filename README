@@ -1,5 +1,8 @@
 Release Notes: Extratropical Cyclone Tracker Transition to WCOSS2 - released to NCO on September 28, 2021
 
+This notes is also posted on the google docs:
+https://docs.google.com/document/d/1N8BBDHmyKHHOgIF9za2gVwzHe8kyWynqpXUolv9wUSo/edit
+
 Due to upgrades of the supercomputers, the extratropical cyclone tracker has been modified to accommodate the new computer systems. Five (5) files and scripts have been modified and twenty nine (29) files were added.
 
 Reason: Transition from WCOSS to WCOSS2.
@@ -88,6 +91,8 @@ export HOMEgenesis_tracker=$NWROOT/ET_tracker
 export DCOMROOT=/lfs/h1/ops/$envir/dcom
 export COMROOT=/lfs/h1/ops/$envir/com
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
+
+The newer version jasper/2.0.25 and libjpeg/9c, and grib_util/1.2.3 must be loaded.
 
 In the directory ecf/genesis_tracker, modify ecflow job cards based on job cards above:
 jtracker_cens.ecf   jtracker_eens.ecf  jtracker_gfs.ecf   jtracker_sref.ecf
