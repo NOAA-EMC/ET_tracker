@@ -52,7 +52,7 @@ export SENDOMB=${SENDOMB:-YES}
 ####################################
 # Specify TRACKER version number
 ####################################
-export genesis_tracker_ver=v3.4.14
+export genesis_tracker_ver=v3.4.15
 export TRACKER_VERSION=${TRACKER_VERSION:-${genesis_tracker_ver}}
 
 ################################
@@ -125,6 +125,7 @@ case $cmodel in
          ;;
 esac
 
+module list
 ###########################################################
 # COMOMB for daily track file 
 # COMGLTRK for track archive file, yearly 
