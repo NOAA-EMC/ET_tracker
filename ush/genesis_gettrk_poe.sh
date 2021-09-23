@@ -32,9 +32,9 @@ cd ${PERTDATA}
 #/nwprod/util/ush/setup.sh
 #/gpfs/dell1/nco/ops/nwprod/mag.v3.17.4/ush/setup.sh
 
-   export gfsvitdir=${gfsvitdir:-${COMROOT}/gfs/prod}
-   export namvitdir=${namvitdir:-${COMROOT}/nam/prod}
-   export archsyndir=${archsyndir:-${COMROOTp1}/arch/prod/syndat}
+   export gfsvitdir=${gfsvitdir:-prod/gfs/v16.2}
+   export namvitdir=${namvitdir:-prod/nam/v4.2}
+   export archsyndir=${archsyndir:-prod/gfs/v16.2/syndat}
 
    export gltrkdir=${gltrkdir:-$COMGLTRK}
 #   export gltrkdir=/meso/save/Guang.Ping.Lou/com/hur/prod/global
@@ -43,12 +43,7 @@ cd ${PERTDATA}
 
 if [ ! -d ${savedir} ];   then mkdir -p ${savedir}; fi
 
-   export TPCATdir=/tpcprd/atcf
-
-   # JY export homesyndir=${homesyndir:-/nwprod/util}
    export exectrkdir=${exectrkdir:-${EXECtrkr}}
-#   export exectrkdir=/meso/save/Guang.Ping.Lou/genesis_tracker.v3.4.0/exec
-   # JY export ushtrkdir=${ushtrkdir:-${homesyndir}/ush}
 
       echo " shell is  " $shell
 export gribver=${gribver:-2}
