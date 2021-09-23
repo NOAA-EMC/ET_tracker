@@ -19,13 +19,14 @@ export job=trkr_sref_09
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
 export HOMEgenesis_tracker=$NWROOT/ET_tracker
 export DCOMROOT=/lfs/h1/ops/$envir/dcom
-export COMROOT=/lfs/h1/ops/$envir/com
-export COMROOTL=/lfs/h2/emc/ptmp/Guang.Ping.Lou
+#export COMROOT=/lfs/h1/ops/$envir/com
+export COMROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export sref_ver=v7.1
 export PDY=20210824
 module load prod_util/2.0.8
-module load grib_util/1.2.2
+module load jasper/2.0.25
+module load grib_util/1.2.3
 module load libjpeg/9c
 module load wgrib2/2.0.8
 ##-----------------------------------------------------------

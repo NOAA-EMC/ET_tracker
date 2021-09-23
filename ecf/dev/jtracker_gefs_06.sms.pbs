@@ -1,21 +1,20 @@
 #!/bin/sh
-#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_nvgm_12.out15
-#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_nvgm_12.out15
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gefs_06.out06
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gefs_06.out06
 #PBS -q dev
-#PBS -l select=1:ncpus=1
-#PBS -l walltime=0:40:0
+#PBS -l place=vscatter,select=1:ncpus=64:mpiprocs=32
+#PBS -l walltime=1:40:0
 #PBS -A GFS-DEV
-#PBS -N nvgm_trk_12
+######PBS -l select=1:ncpus=62:mpiprocs=31:mem=30GB
 
-# EXPORT list here
 set -x
+##export envir=prod
 export envir=canned
-export cmodel=nvgm
-export NET=nvgm
-export RUN=navgem
-export cyc=12
-export job=tracker_nvgm_12
-export PDY=20210824
+export cmodel=gefs
+export NET=gens
+export RUN=gefs
+export cyc=06
+export job=tracker_gefs_06
 
 ##-----------------------------------------------------------
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
@@ -24,12 +23,11 @@ export DCOMROOT=/lfs/h1/ops/$envir/dcom
 #export COMROOT=/lfs/h1/ops/$envir/com
 export COMROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
-export gfs_ver=v16.2
+export gefs_ver=v12.2
 export PDY=20210824
 module load prod_util/2.0.8
 module load jasper/2.0.25
 module load grib_util/1.2.3
-module load jasper/2.0.25
 module load libjpeg/9c
 module load wgrib2/2.0.8
 ##-----------------------------------------------------------
