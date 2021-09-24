@@ -114,7 +114,7 @@ case $cmodel in
    nvgm) export COMIN=${DCOMROOT}/$RUN
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.${PDY}
          ;;
-  ukmet) export COMIN=$(compath.py ${envir}/${NET}/${ukmet_ver}/${RUN}.$PDY)
+  ukmet) export COMIN=$(compath.py ${envir}/${NET}/${ukmet_ver}/${RUN}.$PDY)/$CYC/pgrba
          export COMOUT=${COMROOT}/gentracks/${envir}/${RUN}.${PDY}
          ;;
   nam)   export COMIN=$(compath.py ${envir}/${NET}/${nam_ver}/${RUN}.$PDY)
