@@ -93,6 +93,8 @@ export COMROOT=/lfs/h1/ops/$envir/com
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 
 The newer version jasper/2.0.25 and libjpeg/9c, and grib_util/1.2.3 must be loaded.
+All 11 model outputs following need to be tested:
+GFS, NAM, GEFS, SREF, CMC, CENS, FENS, NEVGEM, UKMET, ECMWF, EENS.
 
 In the directory ecf/genesis_tracker, modify ecflow job cards based on job cards above:
 jtracker_cens.ecf   jtracker_eens.ecf  jtracker_gfs.ecf   jtracker_sref.ecf
