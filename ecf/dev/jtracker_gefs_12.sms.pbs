@@ -1,6 +1,6 @@
 #!/bin/sh
-#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gefs_12.out06
-#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gefs_12.out06
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gefs_12.out07
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gefs_12.out07
 #PBS -q dev
 #PBS -l place=vscatter,select=1:ncpus=64:mpiprocs=32
 #PBS -l walltime=1:40:0

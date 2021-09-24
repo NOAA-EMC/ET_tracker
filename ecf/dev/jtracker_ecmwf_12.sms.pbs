@@ -1,6 +1,6 @@
 #!/bin/sh
-#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_emx_12.out09
-#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_emx_12.out09
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_emx_12.out10
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_emx_12.out10
 #PBS -q dev
 #PBS -l select=1:ncpus=1
 #PBS -l walltime=0:40:0
