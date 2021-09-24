@@ -72,7 +72,8 @@ If output filenames are changing, list the new filename.
 N/A.
 
 Compute resource information, for every job:
-        No changes
+The resources are basically based on whether it is deterministic or ensemble models. For each deterministic model, only one task is needed. For ensemble models, the number of tasks are requested according to the number of members in the ensemble. Ensembles are executed using MPMD regime. This is the same as the assignments on the WCOSS P3.
+
 
 Dissemination will remain the same.
 HPSS archive retention will remain the same. (N/A)
