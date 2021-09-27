@@ -3,7 +3,7 @@ Release Notes: Extratropical Cyclone Tracker Transition to WCOSS2 - released to 
 This notes is also posted on the google docs:
 https://docs.google.com/document/d/1N8BBDHmyKHHOgIF9za2gVwzHe8kyWynqpXUolv9wUSo/edit
 
-Due to upgrades of the supercomputers, the extratropical cyclone tracker has been modified to accommodate the new computer systems. Five (5) files and scripts have been modified and twenty nine (29) files were added.
+Due to upgrades of the supercomputers, the extratropical cyclone tracker has been modified to accommodate the new computer systems. Five (5) files and scripts have been modified and twenty nine (29) files were added. The version number has changed from v3.4.14 to v3.4.15.
 
 Reason: Transition from WCOSS to WCOSS2.
 
@@ -47,8 +47,8 @@ corresponding resource requirements, path modifications, correct module
 loading and others.
 
 scripts/exgenesis_tracker_poe.sh.ecf:
-APRUN format changed to new requirements and path changes.
-       
+APRUN format changed to new requirements and paths have been modified.
+
 jobs/JTRACKER:
 Original paths were replaced by WCOSS2 path.
 
