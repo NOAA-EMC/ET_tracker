@@ -26,10 +26,6 @@ export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export gefs_ver=v12.2
 export PDY=20210824
 module load prod_util/2.0.9
-module load jasper/2.0.25
-module load grib_util/1.2.3
-module load libjpeg/9c
-module load wgrib2/2.0.8
 ##-----------------------------------------------------------
 
 . /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/jobs/JTRACKER
