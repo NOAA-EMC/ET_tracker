@@ -7,6 +7,9 @@ Due to upgrades of the supercomputers, the extratropical cyclone tracker has bee
 
 Reason: Transition from WCOSS to WCOSS2.
 
+List of external software used:
+Simply load default prod modules with the latest versions. Check the module “prod_util/2.0.9”. If it is an earlier version (as of Sept. 28), update this module to 2.0.9.
+
 Where is the release tag on subversion/git/vlab?
 It is on Github by using the following address:
 https://github.com/NOAA-EMC/ET_tracker
@@ -85,13 +88,23 @@ Procedure to download the new version:
 git clone https://github.com/NOAA-EMC/ET_tracker.git genesis_tracker.v3.4.15
 cd genesis_tracker.v3.4.15
 git checkout genesis_tracker.v3.4.15
+Recompile the source code by "sh build.scr >& build.out"
 
 Define paths in the job cards (make modifications to the corresponding NCO paths):
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
+(WCOSS P3: NWROOT=/gpfs/dell1/nco/ops/nwprod)
+
 export HOMEgenesis_tracker=$NWROOT/ET_tracker
+(WCOSS P3:  HOMEgenesis_tracker=/gpfs/dell1/nco/ops/nwprod/genesis_tracker.v3.4.14)
+
 export DCOMROOT=/lfs/h1/ops/$envir/dcom
+(WCOSS P3:  DCOMROOT=/gpfs/dell1/nco/ops/dcom)
+
 export COMROOT=/lfs/h1/ops/$envir/com
+(WCOSS P3:  COMROOT=/gpfs/dell1/nco/ops/com)
+
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
+(WCOSS P3:  DATAROOT=/gpfs/dell1/nco/ops/tmpnwprd)
 
 The newer version jasper/2.0.25 and libjpeg/9c, and grib_util/1.2.3 must be loaded.
 All 11 model outputs following need to be tested:
