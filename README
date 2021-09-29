@@ -3,17 +3,17 @@ Release Notes: Extratropical Cyclone Tracker Transition to WCOSS2 - released to 
 This notes is also posted on the google docs:
 https://docs.google.com/document/d/1N8BBDHmyKHHOgIF9za2gVwzHe8kyWynqpXUolv9wUSo/edit
 
-Due to upgrades of the supercomputers, the extratropical cyclone tracker has been modified to accommodate the new computer systems. Five (5) files and scripts have been modified and twenty nine (29) files were added. The version number has changed from v3.4.14 to v3.4.15.
+Due to upgrades of the supercomputers, the extratropical cyclone tracker has been modified to accommodate the new computer systems. Five (5) files and scripts have been modified and twenty nine (31) files were added. The version number has changed from v3.4.14 to v3.5.0.
 
 Reason: Transition from WCOSS to WCOSS2.
 
 List of external software used:
-Simply load default prod modules with the latest versions. Check the module “prod_util/2.0.9”. If it is an earlier version (as of Sept. 28), update this module to 2.0.9.
+External modules with specific versions are loaded as in /versions/build.ver and /versions/run.ver.
 
 Where is the release tag on subversion/git/vlab?
 It is on Github by using the following address:
 https://github.com/NOAA-EMC/ET_tracker
-Under genesis_tracker.v3.4.15 branch
+Under genesis_tracker.v3.5.0 branch
 
 List of all code/scripts modified with this release:
         ecf/dev/jtracker_cens_00.sms.pbs
@@ -65,6 +65,10 @@ Cyclone vitals path modified to the new location.
 modulefiles/gen_trkr.wcoss2
 Added for new modules needed for the WOCSS2.
 
+versions/build.ver
+versions/run.ver
+Added version numbers and required modules.
+
 Were any other changes made that aren’t directly related to the transition?
 No other changes were made not related to this addition.
 
@@ -85,16 +89,24 @@ What are your up and downstream dependencies?
 All upstream model data (remain the same.)
 
 Procedure to download the new version:
-git clone https://github.com/NOAA-EMC/ET_tracker.git genesis_tracker.v3.4.15
-cd genesis_tracker.v3.4.15
-git checkout genesis_tracker.v3.4.15
+git clone https://github.com/NOAA-EMC/ET_tracker.git genesis_tracker.v3.5.0
+cd genesis_tracker.v3.5.0
+git checkout genesis_tracker.v3.5.0
 Recompile the source code by "sh build.scr >& build.out"
 
 Define paths in the job cards (make modifications to the corresponding NCO paths):
+#export NWROOT=/lfs/h1/ops/$envir/packages
+#export HOMEgenesis_tracker=$NWROOT/genesis_tracke.${TRACKER_VERSION}
+#export COMROOT=/lfs/h1/ops/$envir/com
+#export DATAROOT=/lfs/f1/ops/$envir/tmp
+
+
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
+(WCOSS2: export NWROOT=/lfs/h1/ops/$envir/packages)
 (WCOSS P3: NWROOT=/gpfs/dell1/nco/ops/nwprod)
 
 export HOMEgenesis_tracker=$NWROOT/ET_tracker
+(WCOSS2:export HOMEgenesis_tracker=$NWROOT/genesis_tracke.${TRACKER_VERSION})
 (WCOSS P3:  HOMEgenesis_tracker=/gpfs/dell1/nco/ops/nwprod/genesis_tracker.v3.4.14)
 
 export DCOMROOT=/lfs/h1/ops/$envir/dcom
@@ -104,9 +116,9 @@ export COMROOT=/lfs/h1/ops/$envir/com
 (WCOSS P3:  COMROOT=/gpfs/dell1/nco/ops/com)
 
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
+(WCOSS2: export DATAROOT=/lfs/f1/ops/$envir/tmp)
 (WCOSS P3:  DATAROOT=/gpfs/dell1/nco/ops/tmpnwprd)
 
-The newer version jasper/2.0.25 and libjpeg/9c, and grib_util/1.2.3 must be loaded.
 All 11 model outputs following need to be tested:
 GFS, NAM, GEFS, SREF, CMC, CENS, FENS, NEVGEM, UKMET, ECMWF, EENS.
 
