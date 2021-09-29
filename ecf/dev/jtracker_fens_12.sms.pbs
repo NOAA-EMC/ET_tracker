@@ -1,6 +1,6 @@
 #!/bin/sh
-#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_fnmoc_12.out03
-#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_fnmoc_12.out03
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_fnmoc_12.out05
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_fnmoc_12.out05
 #PBS -q dev
 #PBS -l place=vscatter,select=1:ncpus=42:mpiprocs=21
 #PBS -A GFS-DEV
@@ -15,6 +15,7 @@ export NET=gens
 export RUN=fens
 export cyc=12
 export job=fens_trkr_12
+source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/versions/run.ver
 
 ##-----------------------------------------------------------
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
@@ -24,7 +25,6 @@ export DCOMROOT=/lfs/h1/ops/$envir/dcom
 export COMROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export PDY=20210824
-module load prod_util/2.0.9
 ##-----------------------------------------------------------
 
 . /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/jobs/JTRACKER

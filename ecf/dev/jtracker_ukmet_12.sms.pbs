@@ -1,6 +1,6 @@
 #!/bin/sh
-#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_ukx_12.out11
-#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_ukx_12.out11
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_ukx_12.out09
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_ukx_12.out09
 #PBS -q dev
 #PBS -l select=1:ncpus=1
 #PBS -l walltime=0:40:0
@@ -15,17 +15,17 @@ export NET=ens_tracker
 export RUN=ukmet
 export cyc=12
 export job=tracker_ukx_12
+source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/versions/run.ver
 
 ##-----------------------------------------------------------
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
 export HOMEgenesis_tracker=$NWROOT/ET_tracker
 export DCOMROOT=/lfs/h1/ops/$envir/dcom
-##export COMROOT=/lfs/h1/ops/$envir/com
+#export COMROOT=/lfs/h1/ops/$envir/com
 export COMROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
-export ukmet_ver=v1.3
+export ukmet_ver=${ukmet_ver:-v1.3}
 export PDY=20210823
-module load prod_util/2.0.8
 ##-----------------------------------------------------------
 
 . /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/jobs/JTRACKER

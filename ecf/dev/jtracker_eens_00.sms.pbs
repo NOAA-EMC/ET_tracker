@@ -1,6 +1,6 @@
 #!/bin/sh
-#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_eens_00.out08
-#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_eens_00.out08
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_eens_00.out09
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_eens_00.out09
 #PBS -q dev
 #PBS -l place=vscatter,select=1:ncpus=100:mpiprocs=50
 #PBS -A GFS-DEV
@@ -14,6 +14,7 @@ export NET=ens_tracker
 export RUN=ecme
 export cyc=00
 export job=trkr_eens_00
+source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/versions/run.ver
 
 ##-----------------------------------------------------------
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
@@ -22,9 +23,8 @@ export DCOMROOT=/lfs/h1/ops/$envir/dcom
 #export COMROOT=/lfs/h1/ops/$envir/com
 export COMROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
-export eens_ver=v1.3
+export eens_ver=${eens_ver:-v1.3}
 export PDY=20210824
-module load prod_util/2.0.9
 ##-----------------------------------------------------------
 
 . /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/jobs/JTRACKER

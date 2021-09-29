@@ -1,6 +1,6 @@
 #!/bin/sh
-#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_emx_12.out10
-#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_emx_12.out10
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_emx_12.out09
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_emx_12.out09
 #PBS -q dev
 #PBS -l select=1:ncpus=1
 #PBS -l walltime=0:40:0
@@ -15,6 +15,7 @@ export NET=us007003
 export RUN=ecmwf
 export cyc=12
 export job=tracker_ecmwf_12
+source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/versions/run.ver
 
 ##-----------------------------------------------------------
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
@@ -24,7 +25,6 @@ export DCOMROOT=/lfs/h1/ops/$envir/dcom
 export COMROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export PDY=20210824
-module load prod_util/2.0.9
 ##-----------------------------------------------------------
 
 . /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/jobs/JTRACKER

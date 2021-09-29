@@ -15,6 +15,7 @@ export NET=gfs
 export RUN=gfs
 export cyc=12
 export job=tracks_gfs_12
+source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/versions/run.ver
 
 ##-----------------------------------------------------------
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
@@ -23,9 +24,8 @@ export DCOMROOT=/lfs/h1/ops/$envir/dcom
 #export COMROOT=/lfs/h1/ops/$envir/com
 export COMROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
-export gfs_ver=v16.2
+export gfs_ver=${gfs_ver:-v16.2}
 export PDY=20210824
-module load prod_util/2.0.9
 ##-----------------------------------------------------------
 
 . /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/jobs/JTRACKER

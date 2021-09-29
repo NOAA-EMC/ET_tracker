@@ -15,6 +15,7 @@ export NET=gens
 export RUN=gefs
 export cyc=12
 export job=tracker_gefs_12
+source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/versions/run.ver
 
 ##-----------------------------------------------------------
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
@@ -23,9 +24,8 @@ export DCOMROOT=/lfs/h1/ops/$envir/dcom
 #export COMROOT=/lfs/h1/ops/$envir/com
 export COMROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
-export gefs_ver=v12.2
+export gefs_ver=${gefs_ver:-v12.2}
 export PDY=20210824
-module load prod_util/2.0.9
 ##-----------------------------------------------------------
 
 . /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/jobs/JTRACKER
