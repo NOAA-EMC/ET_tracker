@@ -21,9 +21,12 @@ source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/versions/run.ver
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
 export HOMEgenesis_tracker=$NWROOT/ET_tracker
 export DCOMROOT=/lfs/h1/ops/$envir/dcom
-#export COMROOT=/lfs/h1/ops/$envir/com
 export COMROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
+#export NWROOT=/lfs/h1/ops/$envir/packages
+#export HOMEgenesis_tracker=$NWROOT/genesis_tracke.${TRACKER_VERSION}
+#export COMROOT=/lfs/h1/ops/$envir/com
+#export DATAROOT=/lfs/f1/ops/$envir/tmp
 export ukmet_ver=${ukmet_ver:-v1.3}
 export PDY=20210823
 ##-----------------------------------------------------------
