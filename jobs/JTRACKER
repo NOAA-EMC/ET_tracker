@@ -87,41 +87,41 @@ export COMGLTRK=${COMROOT}/gentracks/${envir}/gentracks
 export tmscrdir=${COMROOT}/gentracks/${envir}/arch
 
 case $cmodel in
-  gefs)  export COMIN=$(compath.py ${envir}/${cmodel}/${gefs_ver}/${RUN}.$PDY)/$CYC/atmos/pgrb2ap5
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+	gefs)  export COMIN=$(compath.py ${envir}/${cmodel}/${gefs_ver}/${RUN}.$PDY/$CYC/atmos/pgrb2ap5)
+		export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
   fens)  export COMIN=${DCOMROOT}/${PDY}/wgrbbul/fnmocens_gb2
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+	  export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
-  sref)  export COMIN=$(compath.py ${envir}/${cmodel}/${sref_ver}/${RUN}.$PDY)/$CYC/pgrb
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+ sref)  export COMIN=$(compath.py ${envir}/${cmodel}/${sref_ver}/${RUN}.$PDY/$CYC/pgrb)
+	 export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
   ecmwf) export COMIN=${DCOMROOT}/${PDY}/wgrbbul/${RUN}
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+	  export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
   eens)  export COMIN=$(compath.py ${envir}/${NET}/${eens_ver}/${RUN}.$PDY)
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+	  export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
-  cens)  export COMIN=$(compath.py ${envir}/${NET}/${cens_ver}/${RUN}.$PDY)/$CYC/pgrb2ap5
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+ cens)  export COMIN=$(compath.py ${envir}/${NET}/${cens_ver}/${RUN}.$PDY/$CYC/pgrb2ap5)
+	 export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
    cmc)  export COMIN=${DCOMROOT}/$PDY/wgrbbul/cmc_gdps_25km
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+	   export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
-   gfs)  export COMIN=$(compath.py ${envir}/${cmodel}/${gfs_ver}/${RUN}.$PDY)/$CYC/atmos
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+ gfs)  export COMIN=$(compath.py ${envir}/${cmodel}/${gfs_ver}/${RUN}.$PDY/$CYC/atmos)
+	 export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
    nvgm) export COMIN=${DCOMROOT}/$RUN
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+	   export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
-  ukmet) export COMIN=$(compath.py ${envir}/${NET}/${ukmet_ver}/${RUN}.$PDY)/$CYC/pgrba
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+ ukmet) export COMIN=$(compath.py ${envir}/${NET}/${ukmet_ver}/${RUN}.$PDY/$CYC/pgrba)
+	  export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
   nam)   export COMIN=$(compath.py ${envir}/${NET}/${nam_ver}/${RUN}.$PDY)
-	     export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+	  export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
    *)   export COMIN=$(compath.py ${envir}/${NET}/${cmodel}_ver/${RUN}.$PDY)
-	    export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY
+	   export COMOUT=$(compath.py ${envir}/gentracks/${TRACKER_VERSION}/${RUN}.$PDY)
          ;;
 esac
 
@@ -159,7 +159,7 @@ done
 cat $pgmout
 
 date
-if [ "$KEEPDATA" != YES ]; then
-   cd $DATAROOT
-   rm -rf $DATA
-fi
+#if [ "$KEEPDATA" != YES ]; then
+#   cd $DATAROOT
+#   rm -rf $DATA
+#fi
