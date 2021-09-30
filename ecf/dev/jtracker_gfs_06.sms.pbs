@@ -15,11 +15,11 @@ export NET=gfs
 export RUN=gfs
 export cyc=06
 export job=tracks_gfs_06
-source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/versions/run.ver
+source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/genesis_tracker.v3.5.0/versions/run.ver
 
 ##-----------------------------------------------------------
 #export NWROOT=/lfs/h1/ops/$envir/packages
-#export HOMEgenesis_tracker=$NWROOT/genesis_tracke.${TRACKER_VERSION}
+#export HOMEgenesis_tracker=$NWROOT/genesis_tracke.${genesis_tracker_ver}
 #export COMROOT=/lfs/h1/ops/$envir/com
 #export DATAROOT=/lfs/f1/ops/$envir/tmp
 export gfs_ver=${gfs_ver:-v16.2}
@@ -45,10 +45,10 @@ module load python/3.8.6
 module load cray-pals/1.0.12
 
 export NWROOT=/lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou
-export HOMEgenesis_tracker=$NWROOT/ET_tracker
+export HOMEgenesis_tracker=$NWROOT/genesis_tracker.v3.5.0
 export DCOMROOT=/lfs/h1/ops/$envir/dcom
 export COMROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 export DATAROOT=/lfs/h2/emc/ptmp/Guang.Ping.Lou
 ##-----------------------------------------------------------
 
-. /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/ET_tracker/jobs/JTRACKER
+. /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/genesis_tracker.v3.5.0/jobs/JTRACKER

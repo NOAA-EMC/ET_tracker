@@ -2,7 +2,7 @@
 set -eux
 
 source ./machine-setup.sh > /dev/null 2>&1
-    source ../versions/build.ver
+    source ../modulefiles/gen_trkr.$target
 echo $G2_INCd
 echo ${W3EMC_INC4}
 echo ${W3EMC_LIBd}
