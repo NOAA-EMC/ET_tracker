@@ -158,7 +158,7 @@ done
 cat $pgmout
 
 date
-#if [ "$KEEPDATA" != YES ]; then
-#   cd $DATAROOT
-#   rm -rf $DATA
-#fi
+if [ "$KEEPDATA" != YES ]; then
+   cd $DATAROOT
+   rm -rf $DATA
+fi
