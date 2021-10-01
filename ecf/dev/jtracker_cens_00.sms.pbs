@@ -2,7 +2,7 @@
 #PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_cens_00.out12
 #PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_cens_00.out12
 #PBS -q dev
-#PBS -l place=vscatter,select=1:ncpus=42:mpiprocs=21:mem=80GB
+#PBS -l place=vscatter,select=1:ncpus=42:mpiprocs=21:mem=40GB
 #PBS -A GFS-DEV
 #PBS -l walltime=1:40:0
 ######PBS -l select=1:ncpus=62:mpiprocs=31:mem=30GB
@@ -15,7 +15,6 @@ export NET=naefs
 export RUN=cmce
 export cyc=00
 export job=trkr_cens_00
-source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/genesis_tracker.v3.5.0/versions/run.ver
 module list
 module purge
 module load envvar/$envvar_ver

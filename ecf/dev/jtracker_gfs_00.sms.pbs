@@ -1,10 +1,11 @@
 #!/bin/sh
-#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gfs_00.out21
-#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gfs_00.out21
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gfs_00.out22
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gfs_00.out22
 #PBS -q dev
-#PBS -l select=1:ncpus=1:mem=10GB
+#PBS -l select=1:ncpus=1:mem=4GB
 #PBS -l walltime=0:40:0
 #PBS -A GFS-DEV
+#PBS -l debug=true
 #PBS -N tracks_gfs_00
 
 # EXPORT list here

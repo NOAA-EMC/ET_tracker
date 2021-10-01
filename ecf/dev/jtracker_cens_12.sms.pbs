@@ -1,8 +1,8 @@
 #!/bin/sh
-#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_cens_12.out12
-#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_cens_12.out12
+#PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_cens_12.out13
+#PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_cens_12.out13
 #PBS -q dev
-#PBS -l place=vscatter,select=1:ncpus=42:mpiprocs=21:mem=80GB
+#PBS -l place=vscatter,select=1:ncpus=42:mpiprocs=21:mem=40GB
 #PBS -A GFS-DEV
 #PBS -l walltime=1:40:0
 ######PBS -l select=1:ncpus=62:mpiprocs=31:mem=30GB
@@ -15,7 +15,6 @@ export NET=naefs
 export RUN=cmce
 export cyc=12
 export job=trkr_cens_12
-source /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/genesis_tracker.v3.5.0/versions/run.ver
 module list
 module purge
 module load envvar/$envvar_ver
@@ -47,4 +46,4 @@ export cens_ver=${cens_ver:-v6.1}
 export PDY=20210824
 ##-----------------------------------------------------------
 
-. /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/genesis_tracker.v3.5.0/jobs/JTRACKER
+. /lfs/h2/emc/vpppg/noscrub/Guang.Ping.Lou/genesis_tracker.v3.5.0/jobs/JTRACKER_test

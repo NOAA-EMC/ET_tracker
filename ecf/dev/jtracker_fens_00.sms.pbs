@@ -2,7 +2,7 @@
 #PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_fnmoc_00.out06
 #PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_fnmoc_00.out06
 #PBS -q dev
-#PBS -l place=vscatter,select=1:ncpus=42:mpiprocs=21:mem=60GB
+#PBS -l place=vscatter,select=1:ncpus=42:mpiprocs=21:mem=40GB
 #PBS -A GFS-DEV
 #PBS -l walltime=1:40:0
 ######PBS -l select=1:ncpus=62:mpiprocs=31:mem=30GB

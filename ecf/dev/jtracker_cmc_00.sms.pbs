@@ -2,7 +2,7 @@
 #PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_cmc_00.out08
 #PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_cmc_00.out08
 #PBS -q dev
-#PBS -l select=1:ncpus=1:mem=10GB
+#PBS -l select=1:ncpus=1:mem=4GB
 #PBS -l walltime=0:40:0
 #PBS -A GFS-DEV
 #PBS -N cmc_trk_00

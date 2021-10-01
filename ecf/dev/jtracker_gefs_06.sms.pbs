@@ -2,7 +2,7 @@
 #PBS -o /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gefs_06.out10
 #PBS -e /lfs/h2/emc/ptmp/Guang.Ping.Lou/tracks_gefs_06.out10
 #PBS -q dev
-#PBS -l place=vscatter,select=1:ncpus=64:mpiprocs=32:mem=100GB
+#PBS -l place=vscatter,select=1:ncpus=64:mpiprocs=32:mem=40GB
 #PBS -l walltime=1:40:0
 #PBS -A GFS-DEV
 ######PBS -l select=1:ncpus=62:mpiprocs=31:mem=30GB
