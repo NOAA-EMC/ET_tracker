@@ -129,10 +129,11 @@ module list
 # COMOMB for daily track file 
 # COMGLTRK for track archive file, yearly 
 ###########################################################
-export COMOMB=${COMROOT}/omb/${envir}/tracker.${PDY}
+#export COMOMB=${COMROOT}/omb/${envir}/tracker.${PDY}
+export COMOUT_OMB=${COMOUT_OMB:-$(compath.py -o gentracks/${genesis_tracker_ver}/gentracks.$PDY)}
 # For future:  export COMOMB=${COMROOT}/gentracks/${envir}/gentracks.${PDY}
 
-mkdir -p $COMOUT $COMOMB $COMGLTRK $tmscrdir
+mkdir -p $COMOUT $COMOUT_OMB $COMGLTRK $tmscrdir
 
 env
 
