@@ -54,6 +54,10 @@ APRUN format changed to new requirements and paths have been modified.
 
 jobs/JTRACKER:
 Original paths were replaced by WCOSS2 path.
+export COMOMB=${COMROOT}/omb/${envir}/tracker.${PDY}
+Has been changed to
+export COMOUT_OMB=${COMOUT_OMB:-$(compath.py -o gentracks/${genesis_tracker_ver}/gentracks.$PDY)}
+
 
 sorc/build.scr
 Modified for sourcing the targeted machine for module load.
