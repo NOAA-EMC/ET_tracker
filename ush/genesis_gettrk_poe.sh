@@ -3119,9 +3119,9 @@ write_vit=y
               cp ${PERTDATA}/trak.${atcfout}.atcfunix.${regtype}.${PDY}${CYL} ${COMOUT}/${atcfout}.t${CYL}z.cyclone.trackatcfunix.${regtype}
               cp ${PERTDATA}/trak.${atcfout}.atcf_gen.${regtype}.${PDY}${CYL}  ${COMOUT}
               cp ${PERTDATA}/trak.${atcfout}.radii.${regtype}.${PDY}${CYL} ${COMOUT}/${atcfout}.t${CYL}z.cyclone.radii.${regtype}
-              cp ${PERTDATA}/trak.${atcfout}.atcf_gen.${regtype}.${PDY}${CYL}  ${COMOMB}
-              cp ${PERTDATA}/trak.${atcfout}.atcfunix.${regtype}.${PDY}${CYL} ${COMOMB}/${atcfout}.t${CYL}z.cyclone.trackatcfunix.${regtype}
-              cp ${PERTDATA}/trak.${atcfout}.radii.${regtype}.${PDY}${CYL} ${COMOMB}/${atcfout}.t${CYL}z.cyclone.radii.${regtype}
+              cp ${PERTDATA}/trak.${atcfout}.atcf_gen.${regtype}.${PDY}${CYL}  ${COMOUT_OMB}
+              cp ${PERTDATA}/trak.${atcfout}.atcfunix.${regtype}.${PDY}${CYL} ${COMOUT_OMB}/${atcfout}.t${CYL}z.cyclone.trackatcfunix.${regtype}
+              cp ${PERTDATA}/trak.${atcfout}.radii.${regtype}.${PDY}${CYL} ${COMOUT_OMB}/${atcfout}.t${CYL}z.cyclone.radii.${regtype}
 
 ##G.P. Lou
 ## Moved this part to "genesis_tracker_poe.sh" due to multiple CPU usage.
